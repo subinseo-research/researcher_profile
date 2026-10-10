@@ -1,7 +1,6 @@
 # Researcher Profile
 
-Personal academic website. Plain HTML/CSS/JS, no build step. Layout inspired by
-[Amy X. Zhang's homepage](https://homes.cs.washington.edu/~axz/).
+Personal academic website. Plain HTML/CSS/JS, no build step.
 
 ## Structure
 
