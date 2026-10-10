@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MindFlex AI - Subin Seo</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Montserrat:wght@300&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+	<link href="css/style.css?v=66" rel="stylesheet">
+	<script src="js/nav.js?v=13"></script>
+	<link rel="icon" href="img/favicon.svg?v=2" type="image/svg+xml">
+</head>
+<body>
+
+	<!-- Project write-up, copied from my own blog post (subinseo-research.github.io/2025/12/05/INST728F). -->
+	<article class="page page-wide">
+		<p class="back"><a href="projects.html">&larr; Fun Projects</a></p>
+		<h1>MindFlex AI</h1>
+		<p class="meta">INST728F &middot; University of Maryland &middot; Fall 2025 &middot; December 5, 2025</p>
+
+		<div class="post-body">
+		        <h2>Overview</h2>
+
+		<div style="text-align: justify;">
+		<h3>🔍Project Context</h3>
+		<p>MindFlex AI is an adaptive information system powered by generative AI models, which can provide personalized information and adjust their UI based on users' queries.  Therefore, it is an intelligent system in which AI reads the emotional state of the human user and responds flexibly accordingly.
+		<br /><br />
+		Jensen Huang, the CEO of NVIDIA,<a href="https://www.instagram.com/reel/DR4QwDcDIVd/" target="_blank" rel="noopener noreferrer"> describes AI as the easiest tool</a> in human history and one that can help realize equity. I agree with this to some extent. More precisely, I believe that while AI is not yet such a tool, it holds that potential. Users can interact with AI through a simple chat in their preferred language, which has contributed to the rapid popularity of models like ChatGPT and Gemini. However, despite the wide diversity in users' backgrounds and contexts, these general-purpose AI models provide the same environment to all users. As a result, the quality of AI responses can vary significantly depending on users' literacy and metacognitive abilities. To address this disparity, I propose an adaptive system that reflects users' context with the UI components. 
+		<br /><br />
+		This project was proposed in the course INST728F in 2025 Fall semester, led by Professor Tom Brinck at the University of Maryland, and the primary focus was to implement these ideas through UX/UI design.
+		</p> 
+		</div>
+
+		<hr />
+		<div style="text-align: justify;">
+		    <br />
+		    <h3>❓Problem</h3>
+		    Most AI systems have been optimized primarily for <u>accuracy-related metrics</u> such as F-measure. However, real human information-seeking behavior is far more influenced by the context in which the system is used and by psychological factors such as cognitive load and trust calibration. 
+		    <br /><br />
+		    Misuse of general-purpose AI can lead to truly dangerous consequences. <a href="https://www.youtube.com/watch?v=jBnJlwcnOBI" target="_blank" rel="noopener noreferrer"> In August 2025, there was a case in which a student died by suicide after interacting with ChatGPT </a>. This incident occurred, in part, because generative AIs like ChatGPT are generally designed to respond supportively to users regardless of the purpose of use. However, this issue cannot simply be dismissed as an individual's poor judgment. To design safer and more equitable information systems, we must confront and address these challenges directly.
+		    <br /><br />
+		    Therefore, this project explores what kinds of design are needed to prevent misuse and build a safer information system.
+		    <br /><br />
+		    <div class="notice--yellow">
+		    "How can I reduce users' <strong>cognitive, emotional, and informational misuse</strong> in general-purpose AI?"
+		    </div>
+		    <br />
+		</div>
+
+		<hr />
+		<h3>🎯Design Goals and Final Designs</h3>
+
+		<p><br />
+		<br />
+		<strong>Design Goal 1️⃣: Support for various modes tailored to users needs</strong>
+		<img loading="lazy" src="img/mindflex/MainStream.gif" alt="Mainstream GIF" /></p>
+		<ul>
+		  <li>Support for five distinct modes:<br /> 
+		          research, development, creation, business, and counseling</li>
+		  <li>The settings page allows for more specific customization: <br />
+		          preferred sources, citation style, level of alerts 
+		<br /></li>
+		</ul>
+
+		<p><img loading="lazy" src="img/mindflex/Mainstream2.gif" alt="Mainstream2" />
+		Users can choose the best-fit mode through conversation
+		<br /></p>
+
+		<p><img loading="lazy" src="img/mindflex/Mainstream3.gif" alt="Mainstream3" />
+		If a user accidentally uses the wrong mode during a conversation, the system detects it and suggests switching to the appropriate mode.</p>
+
+		<p><br />
+		<strong>Design Goal 2️⃣: Guide users to identify their specific information needs</strong></p>
+
+		<p><img loading="lazy" src="img/mindflex/Function1.gif" alt="Function1 GIF" />
+		If a user submits an overly broad prompt, the system asks follow-up questions to better serve the user’s ultimate needs. However, <u>to prevent users from feeling burdened by answering these questions, the design allows for quick and easy responses through clickable options.</u></p>
+
+		<p><br />
+		<strong>Design Goal 3️⃣: Build user trust in sources</strong></p>
+
+		<p><img loading="lazy" src="img/mindflex/Function2.gif" alt="Function2 GIF" />
+		Many recent generative AI services already provide source citations. However, I added a citation type selection button so that users can easily copy and view citations at once, while also presenting an overall credibility message to encourage users’ metacognitive judgment.
+		<br /><br />
+		For credibility message,</p>
+		<ul>
+		  <li>If the number of sources in a generated response is between 0 and 2, the system issues a warning that the content may be dangerous 🔴.</li>
+		  <li>If the number of sources is between 3 and 5, the system issues a warning that the information may be insufficient 🟡.</li>
+		  <li>If the number of sources is 6 or more, the system indicates that the information is safe 🟢.</li>
+		</ul>
+
+		<p><br />
+		<strong>Design Goal 4️⃣: Detect Overtrust</strong></p>
+
+		<p><img loading="lazy" src="img/mindflex/Function3.gif" alt="Function3 GIF" /></p>
+
+		<p>When the system detects that a user overly relies on AI, it intentionally disrupts the flow by displaying a warning message instead of responding in the chat window.</p>
+
+		<hr />
+		<h2>🔎Discovery</h2>
+
+		<div align="center">
+		  <img loading="lazy" src="img/mindflex/interview.png" alt="interview" /> <br />
+		  4 Interviews 
+		</div>
+
+		<h3>Users struggle with…</h3>
+		<ul>
+		  <li>difficulty determining the credibility of AI-generated information</li>
+		  <li>inconsistent information quality depending on the mode or topic</li>
+		  <li>fear of over-relying on AI for decisions without understanding how answers are generated</li>
+		</ul>
+
+		<h3>Users want to…</h3>
+		<ul>
+		  <li>receive clear, transparent, and context-appropriate validation for each response</li>
+		  <li>get citations in their preferred format (APA, MLA, Chicago, etc.)</li>
+		  <li>quickly scan source credibility without opening external tools</li>
+		</ul>
+
+		<h3>Who are we designing for?</h3>
+		<p>Below is a user persona profile created based on the interviews.</p>
+
+		<div align="center">
+		  <img loading="lazy" src="img/mindflex/User1.png" alt="User1" width="80%" />
+		</div>
+
+		<p>Additionally, I used GPT to generate the table below in order to consider a wider range of personas. Due to limitations in resources and budget, I was only able to interview four people from my personal network. However, by tailoring various virtual personas to the product using GPT, I was able to gain additional insights and references.</p>
+
+		<div align="center">
+		  <img loading="lazy" src="img/mindflex/User2.png" alt="User2" width="100%" />
+		</div>
+
+		<h3>What are the product goals??</h3>
+		<p><img loading="lazy" src="img/mindflex/goal.png" alt="goal" /></p>
+
+		<hr />
+		<h2>💡Ideation</h2>
+
+		<h3>Low-fidelity Design Sketch</h3>
+		<p>I created the initial design by drawing it by hand.</p>
+
+		<p><img loading="lazy" src="img/mindflex/Low-fidelity_wireframe.jpg" alt="Low-fidelity_wireframe" /></p>
+
+		<h3>Wireframe</h3>
+		<p>Based on the sketch, we created wireframes, which helped ensure the designs aligned with the intended design goals.</p>
+
+		<p><img loading="lazy" src="img/mindflex/High-fidelity_wireframe.png" alt="Highfidelity_wireframe" /></p>
+
+		<h3>User Behavior Flow</h3>
+		<div align="center">
+		  <img loading="lazy" src="img/mindflex/flow.png" alt="flow" /> 
+		</div>
+
+		<h3>Design Identity</h3>
+		<div align="center">
+		  <img loading="lazy" src="img/mindflex/UI_Color.png" alt="UI_Color" width="80%" />
+		</div>
+		<p>I  wanted to highlight the system’s core identity—offering <u>a variety of selectable modes.</u> To achieve this, the overall system design was kept simple, using gray tones, black text, and a white background. However, I used distinct and vibrant colors for each mode to visually differentiate them. Each color was carefully chosen to match the concept of its corresponding mode:</p>
+		<ul>
+		  <li>Research — Soft Study Blue (#DCEBFF)🔵</li>
+		  <li>Tech — Mint Logic Green (#E3FCEF)🟢</li>
+		  <li>Creative — Pastel Neon Purple (#F4E8FF)🟣</li>
+		  <li>Business — Warm Office Orange (#FFE9CC)🟠</li>
+		  <li>Counselor — Soft Emotional Pink (#FFE5F0)💗 
+		<br /><br /></li>
+		</ul>
+
+		<p>Lastly, the logo combines these five colors into a single wave, forming the shape of a brain to symbolize the mind.</p>
+
+		<hr />
+		<h2>🔁Iteration</h2>
+
+		<h3>Feedback from users</h3>
+		<p>Based on feedback that it should be easier to modify default settings, I added a “…” button that allows users to easily navigate to the settings page.</p>
+
+		<p><img loading="lazy" src="img/mindflex/Iteration1.png" alt="Iteration1" /></p>
+
+		<h3>Feedback from GPT</h3>
+		<p>While trying to achieve the design goal of clearly identifying user needs without overwhelming them, GPT suggested a method: providing clickable choice examples to allow users to respond easily and effortlessly.</p>
+
+		<p><img loading="lazy" src="img/mindflex/Iteration2.png" alt="Iteration2" /></p>
+
+		<h3>Feedback from Figma AI</h3>
+		<p>One convenient aspect of Figma AI is that, for non-core design elements—such as a general settings page—it can automatically generate layouts based on common design conventions.</p>
+
+		<p><img loading="lazy" src="img/mindflex/Iteration3.png" alt="Iteration3" /></p>
+
+		<h3>Before-and-after comparison</h3>
+		<p>I primarily used GPT for logo creation, refining design goals, and establishing the overall structure, while Figma AI was used for adjusting smaller aesthetic elements.</p>
+
+		<p><img loading="lazy" src="img/mindflex/Iteration4.png" alt="Iteration4" /></p>
+
+		<hr />
+		<h2>✨Reflection</h2>
+		<div style="text-align: justify;">
+		    <h3>Use of Artificial Intelligence</h3>
+		    <p>
+		      The goal of this course was to successfully complete a project by appropriately utilizing AI. 
+		      For this project, I used <strong>GPT-5, Figma Pro, and Whyser</strong> (an interview research tool). 
+		      In chronological order, I began by conducting interviews with four individuals to explore the potential significance 
+		      and necessity of the project. During this process, I used Whyser and ChatGPT to generate appropriate interview 
+		      questions and summarize the interview content.
+		      Next, I collaborated with ChatGPT for brainstorming to sketch out the initial design structure. 
+		      Based on this, I created wireframes using Figma. 
+		      While doing so, I also used ChatGPT to develop concrete user scenarios to include in the wireframes.
+		      <br /><br />
+		      Finally, I used Figma AI—one of the main tools in this project—to implement dynamic interactions. 
+		      Since the goal of my project was to simulate a generative AI system, I aimed to produce higher-fidelity, dynamic 
+		      wireframes using Figma’s built-in AI capabilities.
+		    </p>
+		</div>
+
+		<ul>
+		  <li><strong>Figma AI</strong>: Implemented <u>interactive design elements</u>, modified aesthetic elements, and automatically designed peripheral elements.</li>
+		  <li><strong>ChatGPT</strong>: Helped develop core ideas, design wireframes, generate icons (using image generation tools), and suggest key revisions.</li>
+		</ul>
+
+		<h3>Challenges</h3>
+		<p>Since it was my first time actually designing a UI, the process felt unfamiliar, and I was not confident using Figma.  As a result, I tried to use various types of AI models throughout the project. In particular, although Figma AI is very useful, when designing multi-layered pages, the request can sometimes be applied to the wrong page if the specific page is not clearly mentioned by me. (This can happen even when the request is made within a certain screen, but the changes are reflected in a different one.)</p>
+
+		<h3>Future Work</h3>
+		<p>My personal research goal is to design and develop human-centered systems. In most research, this mostly involves analyzing user behavior or fine-tuning algorithms. However, in order to experiment with systems with human subjects through mock systems, I believe it is essential to also have experience in UX/UI design and implementation. That is why I undertook this project. In the future, I will focus on improving algorithms and enhancing the quality of information. Once the design goals can be implemented algorithmically, I plan to use the experience gained from this project to guide the development of more effective system designs.</p>
+
+
+      
+		</div>
+	</article>
+
+	<footer>
+		&copy; 2026 Subin Seo
+	</footer>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Subin Seo</title>
+	<meta name="description" content="Subin Seo is a researcher working on [research area].">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Montserrat:wght@300&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+	<link href="css/style.css?v=66" rel="stylesheet">
+	<script src="js/nav.js?v=13"></script>
+	<link rel="icon" href="img/favicon.svg?v=2" type="image/svg+xml">
+</head>
+<body>
+
+	<!-- ===== Top: portrait + name, affiliation, short bio ===== -->
+	<section class="container intro">
+		<img class="portrait" src="img/profile.jpg" alt="Portrait of Subin Seo">
+
+		<div>
+			<a class="title-name" href="index.html">Subin Seo</a>
+
+			<p>
+				PhD Student<br>
+				Information and Library Science<br>
+				University of North Carolina, Chapel Hill
+			</p>
+
+			<p>
+				Member of the <a href="#">CHILL (Computer-Human Interaction and Learning Lab)</a> at UNC<br>
+				Advised by <a href="https://ils.unc.edu/~rcapra/">Rob Capra</a>,
+				working closely with <a href="https://ils.unc.edu/~jarguell/">Jaime Arguello</a>
+			</p>
+
+			<p>
+				My research is in the field of [area 1], [area 2], and [area 3].
+				I work on [one or two sentences describing what you build or study and why it matters],
+				with applications to [application domain 1], [application domain 2], and [application domain 3].
+			</p>
+		</div>
+	</section>
+
+	<!-- ===== Bottom: publications (left) + sidebar (right) ===== -->
+	<section class="container columns">
+
+		<main class="main">
+			<h2 class="mini-header">Featured Recent Publications <a href="publications.html" style="font-size: 16px; font-variant: normal;">(see all)</a></h2>
+			<div id="latest-publications"></div>
+		</main>
+
+		<aside class="sidebar">
+			<h2 class="mini-header">Contact Info</h2>
+			<div class="contact">
+				Email: <a href="mailto:subinseo@unc.edu" class="copy-email" data-copy="subinseo@unc.edu" title="Click to copy">subinseo@unc.edu</a><span class="copy-status" aria-live="polite"></span><br>
+				Github: <a href="https://github.com/subinseo-research">subinseo-research</a><br>
+				<a href="https://scholar.google.com/citations?user=gc2EozkAAAAJ&amp;hl=en">Google Scholar</a><br>
+				<a href="https://www.semanticscholar.org/author/Subin-Seo/2382755878">Semantic Scholar</a><br>
+				<a href="https://www.linkedin.com/in/subin-seo-029834264/">LinkedIn</a>
+			</div>
+
+			<h2 class="mini-header">Latest News</h2>
+			<p>Nov 3, 2026: CHI 2027 paper accepted!</p>
+			<p>Sep 27, 2026: <a href="https://lnkd.in/p/ehjP7rU3">Won 2nd place</a> 🎉 in the graduate level at the Carolina Data Challenge!</p>
+			<p>Aug 17, 2026: Started the PhD program in Information and Library Science (ILS) at UNC!</p>
+
+			<!-- Optional section; delete if not needed.
+			<h2 class="mini-header">Application Materials</h2>
+			<a href="papers/research_statement.pdf">Research Statement</a>,
+			<a href="papers/teaching_statement.pdf">Teaching Statement</a>
+			-->
+		</aside>
+
+	</section>
+
+	<footer>
+		&copy; 2026 Subin Seo
+	</footer>
+
+	<script src="js/data.js?v=11"></script>
+	<script src="js/publications.js?v=11"></script>
+	<script>
+		renderPublications(document.getElementById("latest-publications"), { limit: 20 });
+
+		// Clicking the email copies it instead of opening a mail app.
+		// If copying is not possible, the normal mailto link still works.
+		document.querySelectorAll(".copy-email").forEach(function (link) {
+			var status = link.nextElementSibling;
+			var timer;
+
+			function copyFallback(text) {
+				var area = document.createElement("textarea");
+				area.value = text;
+				area.style.position = "fixed";
+				area.style.opacity = "0";
+				document.body.appendChild(area);
+				area.select();
+				var ok = false;
+				try {
+					ok = document.execCommand("copy");
+				} catch (e) {}
+				area.remove();
+				return ok;
+			}
+
+			function showCopied() {
+				status.textContent = "Copied!";
+				clearTimeout(timer);
+				timer = setTimeout(function () {
+					status.textContent = "";
+				}, 2000);
+			}
+
+			link.addEventListener("click", function (e) {
+				var text = link.getAttribute("data-copy");
+				if (navigator.clipboard && window.isSecureContext) {
+					e.preventDefault();
+					navigator.clipboard.writeText(text).then(showCopied, function () {
+						if (copyFallback(text)) showCopied();
+						else location.href = link.href;
+					});
+				} else if (copyFallback(text)) {
+					e.preventDefault();
+					showCopied();
+				}
+			});
+		});
+	</script>
+</body>
+</html>

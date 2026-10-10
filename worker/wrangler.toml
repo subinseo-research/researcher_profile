@@ -1,0 +1,15 @@
+name = "blog-hearts"
+main = "hearts-worker.js"
+compatibility_date = "2026-01-01"
+
+# Create the KV namespace once with:  npx wrangler kv namespace create HEARTS
+# then paste the id it prints below.
+[[kv_namespaces]]
+binding = "HEARTS"
+id = "PASTE_KV_NAMESPACE_ID_HERE"
+
+[vars]
+# Sites allowed to call this worker (comma-separated, no trailing slash).
+ALLOWED_ORIGINS = "https://subinseo-research.github.io"
+# Posts that can receive hearts: the slug of every post (data-slug in the HTML). Add new posts here.
+ALLOWED_SLUGS = "next-generation"

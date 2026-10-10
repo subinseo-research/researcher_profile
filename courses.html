@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Coursework - Subin Seo</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Montserrat:wght@300&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+	<link href="css/style.css?v=66" rel="stylesheet">
+	<script src="js/nav.js?v=13"></script>
+	<link rel="icon" href="img/favicon.svg?v=2" type="image/svg+xml">
+</head>
+<body>
+
+	<div class="page">
+		<div class="title-row">
+			<h1>Coursework</h1>
+			<div class="view-toggle" id="course-view" role="radiogroup" aria-label="Sort courses">
+				<button type="button" role="radio" data-view="dept">By Discipline</button>
+				<button type="button" role="radio" data-view="term">By Term</button>
+				<span class="view-toggle-thumb" aria-hidden="true"></span>
+			</div>
+		</div>
+
+		<p>
+			My interdisciplinary background in information science, psychology, and statistics has shaped my interest in search behavior and given me an integrative lens for studying it.
+		</p>
+
+		<!-- Courses are listed in js/courses.js -->
+		<div id="course-list"></div>
+	</div>
+
+	<footer>
+		&copy; 2026 Subin Seo
+	</footer>
+
+	<script src="js/courses.js?v=1"></script>
+	<script>
+		initCourses(document.getElementById("course-view"), document.getElementById("course-list"));
+	</script>
+</body>
+</html>

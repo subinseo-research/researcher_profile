@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Areas of Interest - Subin Seo</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Montserrat:wght@300&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+	<link href="css/style.css?v=66" rel="stylesheet">
+	<script src="js/nav.js?v=13"></script>
+	<link rel="icon" href="img/favicon.svg?v=2" type="image/svg+xml">
+</head>
+<body>
+
+	<div class="page">
+		<h1>Areas of Interest</h1>
+
+		<!-- Area tabs: this page is the main area; the sub area has its own page -->
+		<nav class="area-tabs" aria-label="Research areas">
+			<a class="area-tab tab-main active" href="aoi.html" aria-current="page">Main Area</a>
+			<a class="area-tab tab-sub" href="aoi-sub.html">Sub Area</a>
+		</nav>
+
+		<!-- How people search, from libraries to generative AI. Icons only; hover shows the name. -->
+		<figure class="search-eras">
+			<svg viewBox="0 -68 1000 238" role="img" aria-label="How people search over time: libraries (1900s), computers (1960s), the World Wide Web (1990s), generative AI (2020s), and what comes next. My research focuses on comparing web search and generative AI.">
+
+				<!-- Soft glows behind the eras, in the same colors as the highlighted words below -->
+				<defs>
+					<radialGradient id="glow-past">
+						<stop offset="0%" stop-color="#ffeaa0" stop-opacity="0.75"/>
+						<stop offset="55%" stop-color="#ffeaa0" stop-opacity="0.35"/>
+						<stop offset="100%" stop-color="#ffeaa0" stop-opacity="0"/>
+					</radialGradient>
+					<radialGradient id="glow-now">
+						<stop offset="0%" stop-color="#cfe5f5" stop-opacity="0.8"/>
+						<stop offset="55%" stop-color="#cfe5f5" stop-opacity="0.4"/>
+						<stop offset="100%" stop-color="#cfe5f5" stop-opacity="0"/>
+					</radialGradient>
+				</defs>
+				<!-- Library + computer -->
+				<rect x="-10" y="0" width="480" height="170" fill="url(#glow-past)"/>
+				<!-- Web + generative AI -->
+				<rect x="350" y="0" width="480" height="170" fill="url(#glow-now)"/>
+
+				<!-- Timeline -->
+				<line class="era-axis" x1="70" y1="120" x2="906" y2="120"/>
+				<path class="era-axis-arrow" d="M898 114 L908 120 L898 126"/>
+
+				<text class="era-year" x="140" y="152">1900s</text>
+				<text class="era-year" x="320" y="152">1960s</text>
+				<text class="era-year" x="500" y="152">1990s</text>
+				<text class="era-year is-focus" x="680" y="152">2020s</text>
+				<text class="era-year" x="860" y="152">Next</text>
+
+				<!-- Library -->
+				<g class="era" transform="translate(140 120)">
+					<title>Library</title>
+					<g class="era-pop" style="--i: 0">
+						<circle class="era-point" r="7"/>
+						<image class="era-image" href="img/era-library.png" x="-42" y="-106" width="84" height="84"/>
+					</g>
+				</g>
+
+				<!-- Computer -->
+				<g class="era" transform="translate(320 120)">
+					<title>Computer</title>
+					<g class="era-pop" style="--i: 1">
+						<circle class="era-point" r="7"/>
+						<image class="era-image" href="img/era-computer.png" x="-29" y="-87" width="58" height="58"/>
+					</g>
+				</g>
+
+				<!-- World Wide Web -->
+				<g class="era" transform="translate(500 120)">
+					<title>World Wide Web</title>
+					<g class="era-pop" style="--i: 2">
+						<circle class="era-point" r="7"/>
+						<image class="era-image" href="img/era-web.png" x="-33" y="-92" width="66" height="66"/>
+					</g>
+				</g>
+
+				<!-- Generative AI -->
+				<g class="era era-focus" transform="translate(680 120)">
+					<title>Generative AI</title>
+					<g class="era-pop" style="--i: 3">
+						<circle class="era-pulse" r="8"/>
+						<circle class="era-point" r="8"/>
+						<image class="era-image" href="img/era-genai.gif?v=2" x="-30" y="-84" width="60" height="60"/>
+					</g>
+				</g>
+
+				<!-- What comes next -->
+				<g class="era era-next" transform="translate(860 120)">
+					<title>What comes next?</title>
+					<g class="era-pop" style="--i: 4">
+						<circle class="era-point" r="7"/>
+						<image class="era-image" href="img/era-next.png?v=2" x="-33" y="-89" width="66" height="66"/>
+					</g>
+				</g>
+
+				<!-- Speech bubble above the question mark; links to a blog post -->
+				<a class="era-bubble" href="blog-next-generation.html">
+					<g class="era-pop" style="--i: 5">
+						<path class="era-bubble-shape" d="M652 -63 H972 Q984 -63 984 -51 V2 Q984 14 972 14 H872 L858 32 L846 14 H652 Q640 14 640 2 V-51 Q640 -63 652 -63 Z"/>
+						<foreignObject x="652" y="-55" width="320" height="64">
+							<div xmlns="http://www.w3.org/1999/xhtml" class="era-bubble-text">
+								By finding the gaps through UX research on generative AI, could we propose the next generation of systems?
+								<span class="era-bubble-more">Read more &rarr;</span>
+							</div>
+						</foreignObject>
+					</g>
+				</a>
+			</svg>
+		</figure>
+
+		<p>
+			As an undergraduate, I mainly learned how information is managed in
+			<mark class="hl-past">libraries</mark> and <mark class="hl-past">computer systems</mark>:
+			for example, classification schemes for organizing information, information processing with Python,
+			databases with SQL, and information analysis through text analysis.
+			From my master's studies onward, my research has focused on people who search with <mark class="hl-now">generative AI</mark>, at times in comparison with <mark class="hl-now">web</mark> search.
+			I mostly build custom websites to run online experiments, and I measure people's search behavior
+			through interaction logs and survey measures.
+		</p>
+
+		<section class="area area-main">
+			<span class="area-badge">Main Area</span>
+			<h2 class="mini-header">Human search behavior</h2>
+			<p class="hashtags">
+				<span>#UX research</span>
+				<span>#Behavioral study</span>
+				<span>#Online experiment</span>
+				<span>#Gen AI</span>
+			</p>
+			<p>
+				How do people search with generative AI, and what are the outcomes of their searches?
+			</p>
+			<div class="btn-row">
+				<a class="btn-related" href="concept-map.html">Concept map view &rarr;</a>
+				<a class="btn-related" href="publications.html?tag=main">See the related papers &rarr;</a>
+			</div>
+		</section>
+	</div>
+
+	<footer>
+		&copy; 2026 Subin Seo
+	</footer>
+
+	<script>
+		// Icons rise in one by one when the graphic scrolls into view.
+		(function () {
+			var fig = document.querySelector(".search-eras");
+			var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+			if (!fig || reduce || !("IntersectionObserver" in window)) return;
+			fig.classList.add("will-animate");
+			var io = new IntersectionObserver(function (entries) {
+				if (entries[0].isIntersecting) {
+					fig.classList.add("in-view");
+					io.disconnect();
+				}
+			}, { threshold: 0.4 });
+			io.observe(fig);
+		})();
+	</script>
+</body>
+</html>
