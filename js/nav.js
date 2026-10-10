@@ -1,5 +1,7 @@
 // Hamburger button + side menu, shared by every page. Load in <head> so the
 // open/closed state is set before the first paint. Edit NAV_LINKS to change the menu.
+// Works from pages in subfolders too (blog/<post>/, projects/<project>/): links are resolved
+// against the site root, found from this script's own address.
 //
 // - The menu starts closed on every page. Opening it with the button on a wide
 //   screen docks it and pushes the page right.
@@ -13,15 +15,25 @@
 		{ href: "aboutme.html", label: "About Me" },
 		{ href: "papers/CV.pdf", label: "CV" },
 		{ href: "courses.html", label: "Coursework" },
-		{ href: "publications.html", label: "Publications" },
+		{ href: "publications.html", label: "Publications", also: ["publications/"] },
 		{ href: "aoi.html", label: "Areas of Interest", also: ["aoi-sub.html", "concept-map.html"] },
-		{ href: "projects.html", label: "Fun Projects" },
-		{ href: "blog.html", label: "Blog" },
+		{ href: "projects.html", label: "Fun Projects", also: ["projects/"] },
+		{ href: "blog.html", label: "Blog", also: ["blog/"] },
 	];
+
+	// Site root, e.g. "https://example.org/site/" (this script lives at <root>js/nav.js)
+	var ROOT = document.currentScript.src.replace(/js\/nav\.js[^/]*$/, "");
 
 	var root = document.documentElement;
 	var canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
-	var current = location.pathname.split("/").pop() || "index.html";
+	// This page's path below the site root. An "also" entry ending in "/" matches a whole folder.
+	var current = location.href.slice(ROOT.length).split(/[?#]/)[0] || "index.html";
+	function isCurrent(item) {
+		if (item.href === current) return true;
+		return (item.also || []).some(function (p) {
+			return p.slice(-1) === "/" ? current.indexOf(p) === 0 : p === current;
+		});
+	}
 	var hoverOpened = false;
 	var button;
 
@@ -64,15 +76,15 @@
 
 		var name = document.createElement("a");
 		name.className = "side-menu-name";
-		name.href = "index.html";
+		name.href = ROOT + "index.html";
 		name.textContent = "Subin Seo";
 		panel.appendChild(name);
 
 		NAV_LINKS.forEach(function (item) {
 			var a = document.createElement("a");
-			a.href = item.href;
+			a.href = ROOT + item.href;
 			a.textContent = item.label;
-			if (item.href === current || (item.also || []).indexOf(current) !== -1) {
+			if (isCurrent(item)) {
 				a.className = "active";
 				a.setAttribute("aria-current", "page");
 			}

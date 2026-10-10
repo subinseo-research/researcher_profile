@@ -6,26 +6,29 @@
 	<title>What Comes After Generative AI Search? - Subin Seo</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Montserrat:wght@300&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-	<link href="css/style.css?v=66" rel="stylesheet">
-	<script src="js/nav.js?v=13"></script>
-	<link rel="icon" href="img/favicon.svg?v=2" type="image/svg+xml">
+	<link href="../../css/style.css?v=67" rel="stylesheet">
+	<script src="../../js/nav.js?v=14"></script>
+	<link rel="icon" href="../../img/favicon.svg?v=2" type="image/svg+xml">
 </head>
 <body>
 
 	<!--
 		Blog post template. To write another post:
-		  1. Copy this file and rename it (e.g. blog-my-topic.html).
-		  2. Change data-slug below to a short unique id (lowercase letters, numbers, hyphens), and use the
-		     same value in the heart/comment-count buttons, in blog.html, and in worker/wrangler.toml (ALLOWED_SLUGS).
+		  1. Copy this whole folder (blog/next-generation/) to blog/<your-slug>/. The slug is a short unique id
+		     (lowercase letters, numbers, hyphens). Put the post's images in the same folder and reference them
+		     by file name alone (e.g. <img src="figure1.png">).
+		  2. In the copy's index.html, change data-slug (three places) to the same slug, and edit the title,
+		     date and text. Keep the ../../ in the css/js/link paths at the top and bottom.
 		  3. Write the post with h2 (and optional h3) headings inside .post-body: the floating
 		     table of contents on the right is built from them automatically.
-		  4. Add the post to blog.html.
+		  4. Add an entry for the post at the top of data/blog.js (the blog list), and add the slug to
+		     ALLOWED_SLUGS in worker/wrangler.toml, then run `npx wrangler deploy` (hearts only).
 	-->
 	<div class="page page-post">
 		<div class="post-layout">
 
 			<article class="post-main" data-slug="next-generation">
-				<p class="back"><a href="blog.html">&larr; Blog</a></p>
+				<p class="back"><a href="../../blog.html">&larr; Blog</a></p>
 				<h1>What Comes After Generative AI Search?</h1>
 				<p class="meta">Mon DD, YYYY</p>
 
@@ -82,7 +85,7 @@
 		&copy; 2026 Subin Seo
 	</footer>
 
-	<script src="js/blog-config.js?v=3"></script>
-	<script src="js/blog.js?v=3"></script>
+	<script src="../../js/blog-config.js?v=3"></script>
+	<script src="../../js/blog.js?v=4"></script>
 </body>
 </html>

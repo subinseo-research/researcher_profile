@@ -6,8 +6,8 @@
 	<title>Blog - Subin Seo</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Montserrat:wght@300&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-	<link href="css/style.css?v=66" rel="stylesheet">
-	<script src="js/nav.js?v=13"></script>
+	<link href="css/style.css?v=67" rel="stylesheet">
+	<script src="js/nav.js?v=14"></script>
 	<link rel="icon" href="img/favicon.svg?v=2" type="image/svg+xml">
 </head>
 <body>
@@ -19,30 +19,18 @@
 			Part casual lit review, part outlet for a PhD student’s way-too-many thoughts.
 		</p>
 
-		<!-- One <article> per post; newest first. Link to a post page or an external post. -->
-		<article class="post" data-slug="next-generation">
-			<span class="meta">Mon DD, YYYY</span>
-			<h2 class="post-title"><a href="blog-next-generation.html">What Comes After Generative AI Search?</a></h2>
-			<p>By finding the gaps through UX research on generative AI, could we lead the way in proposing the next generation of systems?</p>
-			<div class="post-stats">
-				<button type="button" class="heart-btn" data-slug="next-generation"></button>
-				<a class="comment-count" href="blog-next-generation.html#comments" data-slug="next-generation" hidden><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9l-5 4V5a1 1 0 0 1 1-1z"/></svg><span class="comment-num"></span></a>
-			</div>
-		</article>
-
-		<!-- Template for the next post: give the article data-slug="your-slug" and copy the .post-stats block from the post above. -->
-		<article class="post">
-			<span class="meta">Mon DD, YYYY</span>
-			<h2 class="post-title"><a href="#">[Post Title]</a></h2>
-			<p>[Two-line summary of the post.]</p>
-		</article>
+		<!-- The list is built from data/blog.js; to add a post, see the notes at the top of that file. -->
+		<div id="post-list"></div>
 	</div>
 
 	<footer>
 		&copy; 2026 Subin Seo
 	</footer>
 
+	<script src="data/blog.js?v=1"></script>
+	<script src="js/lists.js?v=1"></script>
+	<script>renderPosts(document.getElementById("post-list"));</script>
 	<script src="js/blog-config.js?v=3"></script>
-	<script src="js/blog.js?v=3"></script>
+	<script src="js/blog.js?v=4"></script>
 </body>
 </html>

@@ -1,1 +1,1 @@
-Put CV.pdf and paper PDFs in this folder.
+Put CV.pdf and the research / teaching statements in this folder. Each paper's own files go in publications/<slug>/.

@@ -18,13 +18,19 @@
 		return node;
 	}
 
+	// A bare file name ("paper.pdf") lives in publications/<slug>/; anything with a "/" is used as written.
+	function fileUrl(pub, value) {
+		if (!value || !pub.slug || value.indexOf("/") !== -1) return value;
+		return "publications/" + pub.slug + "/" + value;
+	}
+
 	function renderPub(pub) {
 		var article = el("article", "pub");
 
 		var thumbCell = el("div");
 		if (pub.image) {
 			var img = el("img", "pub-thumb");
-			img.src = pub.image;
+			img.src = fileUrl(pub, pub.image);
 			img.alt = "";
 			thumbCell.appendChild(img);
 		}
@@ -33,7 +39,7 @@
 		var body = el("div");
 
 		var title = el("div", "pub-title");
-		var titleLink = pub.links && (pub.links.pdf || pub.links.website);
+		var titleLink = fileUrl(pub, pub.links && (pub.links.pdf || pub.links.website));
 		if (titleLink) {
 			var a = el("a", null, pub.title);
 			a.href = titleLink;
@@ -65,7 +71,7 @@
 
 		var links = el("div", "pub-links");
 		Object.keys(LINK_LABELS).forEach(function (key) {
-			var url = pub.links && pub.links[key];
+			var url = fileUrl(pub, pub.links && pub.links[key]);
 			if (!url) return;
 			var link = el("a", null, LINK_LABELS[key]);
 			link.href = url;

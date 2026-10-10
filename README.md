@@ -4,31 +4,50 @@ Personal academic website. Plain HTML/CSS/JS, no build step.
 
 ## Structure
 
+Each kind of content has a short list in `data/` (one entry per item) and one folder per item holding
+its page and files, so the site stays tidy however many posts, projects, or papers there are.
+The list pages are built from the data files; they show 10 posts or projects per page (`?page=2`, ...).
+
 ```
 index.html          Home: portrait, bio, latest publications, contact, news
 aboutme.html        Longer bio and education
 publications.html   All publications, grouped by year
 aoi.html            Areas of Interest
 concept-map.html    Interactive concept map for the main research area (data in js/concept-map.js)
-projects.html       Fun Projects
+projects.html       Fun Projects (list)
 courses.html        Coursework
-blog.html           Blog
+blog.html           Blog (list)
+
+data/publications.js  Publication list (edit this to add papers)
+data/projects.js      Project list
+data/blog.js          Blog post list
+
+blog/<slug>/          One folder per post: index.html plus the post's images
+projects/<slug>/      One folder per project: index.html plus its images
+publications/<slug>/  One folder per paper: PDF, thumbnail, slides...
+
 css/style.css       All styles
-js/data.js          Publication data (edit this to add papers)
-js/publications.js  Renders publications from js/data.js
+js/publications.js  Renders the publication list
+js/lists.js         Renders the blog and project lists (with page links)
 js/blog.js          Blog table of contents, hearts, comment counts, comment box
 js/blog-config.js   Blog settings (heart server address, giscus values)
+js/nav.js           Side menu (works from subfolders too)
 worker/             Heart counter server (Cloudflare Worker); deployed separately
-img/                Portrait, paper thumbnails, favicon
-papers/             CV.pdf and paper PDFs
+img/                Portrait, favicon, shared images
+papers/             CV.pdf and the research / teaching statements
 ```
 
 ## Editing
 
 - **Profile text, news, contact:** edit `index.html` directly.
-- **Publications:** add an entry to the top of `window.PUBLICATIONS` in `js/data.js`.
-  Both the home page (latest 20) and the publications page update automatically.
-- **Research-area tags:** define tags in `window.TAGS` in `js/data.js` and add their keys to a paper's `tags`.
+- **Publications:** add an entry to the top of `window.PUBLICATIONS` in `data/publications.js`, with a short
+  unique `slug`, and put the paper's files in `publications/<slug>/`. In the entry, a bare file name
+  (`pdf: "paper.pdf"`, `image: "thumb.png"`) means a file in that folder. Both the home page (latest 20)
+  and the publications page update automatically.
+- **Projects:** copy `projects/mindflex/` to `projects/<slug>/`, write the page, and add an entry to the top
+  of `window.PROJECTS` in `data/projects.js`.
+- **Blog posts:** see "Writing a post" below.
+- **Research-area tags:** define tags in `window.TAGS` in `data/publications.js` and add their keys to a paper's `tags`.
   `publications.html?tag=<key>` shows only that area's papers; the Areas of Interest page links there.
 - **Photo:** replace `img/profile.jpg` (used by `index.html` and `aboutme.html`).
 - **CV:** put your CV at `papers/CV.pdf`.
@@ -40,8 +59,9 @@ buttons, comment counts, and a comment box. The table of contents works as is. H
 a one-time setup, because a static site cannot store visitors' data. Until you do it, hearts are saved
 only in each visitor's own browser (no counts shown) and the comment box shows "Comments will open soon."
 
-**Writing a post:** copy `blog-next-generation.html`, follow the comment at the top of that file, and add
-the post to `blog.html`. Each post needs a short unique `data-slug`.
+**Writing a post:** copy the folder `blog/next-generation/` to `blog/<your-slug>/`, follow the comment at the
+top of its `index.html`, and add an entry at the top of `data/blog.js`. The slug is the folder name and the
+post's `data-slug`.
 
 **Comments (giscus, free, uses GitHub Discussions; visitors comment with a GitHub account):**
 1. Push this site to the public repo `subinseo-research/researcher_profile`.

@@ -587,6 +587,7 @@ footer {
 	line-height: 1.4;
 	color: var(--muted);
 	text-decoration: none;
+	cursor: pointer;
 }
 
 .toc li.toc-sub a {
@@ -602,6 +603,20 @@ footer {
 	color: var(--text);
 	font-weight: 600;
 	border-left-color: #4b9cd3;
+}
+
+/* Page links under the blog and project lists */
+.pager {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	margin: 36px 0 8px;
+	font-size: 15px;
+}
+
+.pager-info {
+	color: var(--muted);
 }
 
 /* Hearts and comment counts */

@@ -6,8 +6,8 @@
 	<title>Fun Projects - Subin Seo</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Montserrat:wght@300&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-	<link href="css/style.css?v=66" rel="stylesheet">
-	<script src="js/nav.js?v=13"></script>
+	<link href="css/style.css?v=67" rel="stylesheet">
+	<script src="js/nav.js?v=14"></script>
 	<link rel="icon" href="img/favicon.svg?v=2" type="image/svg+xml">
 </head>
 <body>
@@ -19,39 +19,16 @@
 			[Side projects, experiments, and things made for fun.]
 		</p>
 
-		<article class="pub pub-wide-thumb">
-			<div>
-				<img class="pub-thumb" src="img/mindflex/MainStream.gif" alt="MindFlex AI mode selection screen" loading="lazy">
-			</div>
-			<div>
-				<div class="pub-title"><a href="project-mindflex.html">MindFlex AI</a></div>
-				<div>
-					People use generative AI for a wide range of purposes, yet general-purpose interfaces offer little support for matching tools to needs. This project designs a system that (1) supports intuitive model selection, (2) helps users articulate their information needs through guided dialogue, and (3) provides accurate citations, with the overarching goal of mitigating over-reliance on AI.
-				</div>
-				<div class="meta">UX research &middot; Interviews &middot; Generative AI design</div>
-			</div>
-		</article>
-
-		<!-- Template for the next project: copy this block, then replace the bracketed text and the thumbnail. -->
-		<article class="pub pub-wide-thumb">
-			<div>
-				<img class="pub-thumb" src="img/project-placeholder.svg" alt="">
-			</div>
-			<div>
-				<div class="pub-title"><a href="#">[Project Name]</a></div>
-				<div>
-					[Two to four sentences: what the project is, what problem it addresses, and what you built or found.]
-				</div>
-				<div class="meta">[Tools / methods] &middot; [Course or context] &middot; [Year]</div>
-				<div class="pub-links">
-					<a href="#">Read the project</a>
-				</div>
-			</div>
-		</article>
+		<!-- The list is built from data/projects.js; to add a project, see the notes at the top of that file. -->
+		<div id="project-list"></div>
 	</div>
 
 	<footer>
 		&copy; 2026 Subin Seo
 	</footer>
+
+	<script src="data/projects.js?v=1"></script>
+	<script src="js/lists.js?v=1"></script>
+	<script>renderProjects(document.getElementById("project-list"));</script>
 </body>
 </html>

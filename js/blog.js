@@ -190,19 +190,50 @@
 			return a;
 		});
 
-		function spy() {
-			var current = 0;
-			heads.forEach(function (h, i) {
-				if (h.getBoundingClientRect().top <= 140) current = i;
-			});
-			// At the very bottom, the last section is the current one
-			if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = heads.length - 1;
+		// Set by a click on a TOC entry; keeps that entry highlighted even when the page
+		// is too short to scroll its heading up to the spy line (e.g. the last sections)
+		var picked = null;
+
+		function mark(current) {
 			links.forEach(function (a, i) {
 				a.classList.toggle("is-current", i === current);
 				if (i === current) a.setAttribute("aria-current", "true");
 				else a.removeAttribute("aria-current");
 			});
 		}
+
+		function spy() {
+			if (picked !== null) return mark(picked);
+			var current = 0;
+			heads.forEach(function (h, i) {
+				if (h.getBoundingClientRect().top <= 140) current = i;
+			});
+			// At the very bottom, the last section is the current one
+			if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = heads.length - 1;
+			mark(current);
+		}
+
+		// Click: scroll smoothly to the heading and highlight the entry right away
+		links.forEach(function (a, i) {
+			a.addEventListener("click", function (e) {
+				e.preventDefault();
+				var h = heads[i];
+				var offset = parseFloat(getComputedStyle(h).scrollMarginTop) || 0;
+				var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				window.scrollTo({
+					top: h.getBoundingClientRect().top + window.pageYOffset - offset,
+					behavior: reduce ? "auto" : "smooth",
+				});
+				picked = i;
+				mark(i);
+				if (history.replaceState) history.replaceState(null, "", "#" + h.id);
+			});
+		});
+		// Once the reader scrolls by hand, go back to following the scroll position
+		["wheel", "touchstart", "keydown"].forEach(function (type) {
+			window.addEventListener(type, function () { picked = null; }, { passive: true });
+		});
+
 		// A handful of headings, so recomputing on every scroll event is cheap
 		window.addEventListener("scroll", spy, { passive: true });
 		window.addEventListener("resize", spy);
