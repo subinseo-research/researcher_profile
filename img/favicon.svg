@@ -1,3 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-	<text x="50" y="50" font-size="85" text-anchor="middle" dominant-baseline="central">🎓</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+	<!-- Carolina-blue tile with a white domed rotunda (an Old Well-style silhouette) -->
+	<rect width="64" height="64" rx="12" fill="#4B9CD3"/>
+	<g fill="#fff">
+		<rect x="31" y="8" width="2" height="6"/>
+		<path d="M14 30a18 16 0 0 1 36 0z"/>
+		<rect x="12" y="30" width="40" height="4"/>
+		<rect x="16" y="35" width="4" height="15"/>
+		<rect x="26" y="35" width="4" height="15"/>
+		<rect x="34" y="35" width="4" height="15"/>
+		<rect x="44" y="35" width="4" height="15"/>
+		<rect x="12" y="50" width="40" height="4"/>
+	</g>
 </svg>

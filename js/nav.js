@@ -8,15 +8,18 @@
 // - Moving the mouse to the left edge opens it temporarily; leaving closes it.
 //   Clicking the button while it is hover-opened keeps it open.
 // - Narrow screens: always starts closed and opens over the page.
+//
+// Also, links to other websites (http/https) open in a new tab, on every page, including links
+// the page builds later (publication lists, etc.). mailto: and links within this site are unchanged.
 
 (function () {
 	var NAV_LINKS = [
 		{ href: "index.html", label: "Home" },
 		{ href: "aboutme.html", label: "About Me" },
+		{ href: "aoi.html", label: "Areas of Interest", also: ["aoi-sub.html", "concept-map.html"] },
 		{ href: "papers/CV.pdf", label: "CV" },
 		{ href: "courses.html", label: "Coursework" },
 		{ href: "publications.html", label: "Publications", also: ["publications/"] },
-		{ href: "aoi.html", label: "Areas of Interest", also: ["aoi-sub.html", "concept-map.html"] },
 		{ href: "projects.html", label: "Fun Projects", also: ["projects/"] },
 		{ href: "blog.html", label: "Blog", also: ["blog/"] },
 	];
@@ -121,6 +124,15 @@
 			});
 		});
 	}
+
+	// Decided at click time, so links added to the page by scripts are covered too.
+	document.addEventListener("click", function (e) {
+		var a = e.target.closest && e.target.closest("a[href]");
+		if (!a || a.target) return;
+		if (!/^https?:$/.test(a.protocol) || a.host === location.host) return;
+		a.target = "_blank";
+		a.rel = (a.rel ? a.rel + " " : "") + "noopener noreferrer";
+	}, true);
 
 	document.addEventListener("keydown", function (e) {
 		if (e.key === "Escape") setOpen(false);

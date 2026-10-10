@@ -6,9 +6,9 @@
 	<title>About Me - Subin Seo</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Montserrat:wght@300&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-	<link href="css/style.css?v=67" rel="stylesheet">
-	<script src="js/nav.js?v=14"></script>
-	<link rel="icon" href="img/favicon.svg?v=2" type="image/svg+xml">
+	<link href="css/style.css?v=87" rel="stylesheet">
+	<script src="js/nav.js?v=16"></script>
+	<link rel="icon" href="img/favicon.svg?v=3" type="image/svg+xml">
 </head>
 <body>
 
@@ -17,31 +17,100 @@
 
 		<img class="about-photo" src="img/about.jpg" alt="Subin Seo in front of the Statue of Liberty">
 
-		<p>
-			[Longer bio, written in first or third person. Where you are now, what you study,
-			and who you work with.]
+		<p class="about-intro">
+			Hi, I am Subin Seo (Soo-bin, Suh)<button type="button" class="say-btn" id="say-name" aria-label="Hear how to pronounce my name" title="Hear my name" hidden>
+				<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 9.5h4L13 5v14l-5-4.5H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+			</button><audio id="say-audio" src="audio/subin-seo.mp3" preload="metadata"></audio>.
+			I am currently a first-year PhD student at <a href="https://sdis.unc.edu/">UNC SDIS</a> (School of Data and Information Sciences), advised by <a href="https://ils.unc.edu/~rcapra/">Dr. Rob Capra</a>.
 		</p>
 
 		<p>
-			[Background: previous degrees and institutions, prior research or industry experience.]
+			Bridging human-computer interaction (HCI) and information retrieval (IR), I study search as human behavior.
+			Drawing on a background in library and information science, psychology, and statistics, I use experimental and
+			mixed-methods approaches to examine how people search for, interact with, and make sense of information.
+			I am particularly interested in how generative AI is reshaping these practices, and in designing
+			systems that support users’ information needs while fostering learning and ensuring accessibility.
 		</p>
 
-		<p>
-			[Personal note, e.g. interests outside research.]
-		</p>
 
 		<h2 class="mini-header">Education</h2>
-		<div class="entry">
-			<b>[Degree], [Major]</b> &mdash; [University], [YYYY&ndash;YYYY]<br>
-			<span class="meta">Advisor: [Name]</span>
-		</div>
-		<div class="entry">
-			<b>[Degree], [Major]</b> &mdash; [University], [YYYY&ndash;YYYY]
+		<ul class="edu-list">
+			<li>Ph.D. (in progress), University of North Carolina at Chapel Hill (<a href="https://sdis.unc.edu/academics/doctoral/phd-in-ils/">Information and Library Science</a>)</li>
+			<li>M.S., University of Maryland, College Park (<a href="https://info.umd.edu/academics/masters-programs/master-of-library-and-information-science/">Library and Information Science</a>)</li>
+			<li>B.A., Jeonbuk National University (<a href="https://top.jbnu.ac.kr/liseng/index.do">Library and Information Science</a>; Psychology; Minor in Statistics)</li>
+		</ul>
+
+		<p>
+			Curious about what I studied in each program? Please see <a class="arrow-link" href="courses.html">Coursework <span aria-hidden="true">&rarr;</span></a>
+		</p>
+
+		<h2 class="mini-header"><a class="heading-link" href="aoi.html">Areas of Interest <span aria-hidden="true">&rarr;</span></a></h2>
+		<p>
+			My main area is human search behavior: how do people search with generative AI,
+			and what are the outcomes of their searches?
+			For more details, see my <a class="link-ul" href="concept-map.html">concept map</a>.
+		</p>
+
+		<h2 class="mini-header">Acknowledgements</h2>
+		<p>
+			My master’s studies in the United States were made possible by the Jeollanamdo Institute for Talent & Lifelong Education (Korean government), along with an alumni scholarship from Jeonbuk National University. I am deeply grateful for their support.
+		</p>
+
+		<h2 class="mini-header">Previous Advisors</h2>
+		<ul class="edu-list">
+			<li><a href="https://info.umd.edu/directory/yiwei-xu/">Dr. Yiwei Xu</a>, University of Maryland, College Park (Master’s thesis advisor)</li>
+			<li><a href="https://top.jbnu.ac.kr/liseng/11004/subview.do?enc=Zm5jdDF8QEB8JTJGamJudVByb2ZsJTJGbGlzZW5nJTJGOTMzJTJGODUyMSUyRmFydGNsVmlldy5kbyUzRnBhZ2UlM0QxJTI2ZmluZFR5cGUlM0QlMjZmaW5kV29yZCUzRCUyNg%3D%3D">Dr. JungWon Yoon</a>, Jeonbuk National University (Research advisor and current collaborator)</li>
+			<li><a href="https://top.jbnu.ac.kr/liseng/11004/subview.do?enc=Zm5jdDF8QEB8JTJGamJudVByb2ZsJTJGbGlzZW5nJTJGOTMzJTJGODUxOCUyRmFydGNsVmlldy5kbyUzRnBhZ2UlM0QxJTI2ZmluZFR5cGUlM0QlMjZmaW5kV29yZCUzRCUyNg%3D%3D">Dr. HyoJung Oh</a>, Jeonbuk National University (Academic advisor during undergraduate studies)</li>
+			<li><a href="https://psy.jbnu.ac.kr/psy/2644/subview.do?enc=Zm5jdDF8QEB8JTJGamJudVByb2ZsJTJGcHN5JTJGMjMlMkYzMzM4JTJGYXJ0Y2xWaWV3LmRvJTNGcGFnZSUzRDElMjZmaW5kVHlwZSUzRCUyNmZpbmRXb3JkJTNEJTI2">Dr. Jongwan Kim</a>, Jeonbuk National University (Research advisor in Psychology)</li>
+		</ul>
+		<p>
+			I would not be where I am today without the professors who have guided me along the way.
+			I am forever grateful to each of them.
+		</p>
+
+		<h2 class="mini-header">Personality</h2>
+		<div class="persona-grid">
+			<div class="persona">
+				<h3>Go-getter &amp; learner</h3>
+				<p>I thrive on learning new things and exploring unknown territory. When I have a goal, hard work never feels hard. I believe my hard work can change society.</p>
+				<figure class="about-figure">
+					<img src="img/studylog.gif" alt="Time-lapse of Subin Seo studying at a desk" width="400" height="225" loading="lazy">
+					<figcaption>Study log</figcaption>
+				</figure>
+			</div>
+			<div class="persona">
+				<h3>Team player</h3>
+				<p>I grow most in team environments, learning from different viewpoints and drawing on others’ strengths, as well as from my advisors and colleagues.</p>
+				<figure class="about-figure">
+					<img src="img/ala-2025.jpg" alt="Subin Seo at the University of Maryland Library and Information Science program booth, 2025 ALA Annual Conference" width="1600" height="900" loading="lazy">
+					<figcaption>2025 ALA Annual Conference</figcaption>
+				</figure>
+			</div>
 		</div>
 	</div>
 
 	<footer>
 		&copy; 2026 Subin Seo
 	</footer>
+
+	<script>
+		// The speaker button appears only once the recording (audio/subin-seo.mp3) exists and loads.
+		(function () {
+			var audio = document.getElementById("say-audio");
+			var btn = document.getElementById("say-name");
+			audio.addEventListener("loadedmetadata", function () { btn.hidden = false; });
+			audio.addEventListener("ended", function () { btn.classList.remove("is-playing"); });
+			audio.addEventListener("pause", function () { btn.classList.remove("is-playing"); });
+			audio.addEventListener("play", function () { btn.classList.add("is-playing"); });
+			btn.addEventListener("click", function () {
+				if (audio.paused) {
+					audio.currentTime = 0;
+					audio.play().catch(function () {});
+				} else {
+					audio.pause();
+				}
+			});
+		})();
+	</script>
 </body>
 </html>

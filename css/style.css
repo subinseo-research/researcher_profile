@@ -88,6 +88,49 @@ h1, h2, h3,
 	margin: 0 0 16px;
 }
 
+/* Speech bubble whose tail points at the portrait (to its left; above it when the layout stacks) */
+.intro .speech-bubble {
+	position: relative;
+	margin: 28px 0 0;
+	padding: 16px 24px;
+	background: linear-gradient(135deg, #f4faff, #e3f1fb);
+	border: 1px solid #c9e1f3;
+	border-radius: 20px;
+	box-shadow: 0 3px 10px rgba(75, 156, 211, 0.08);
+	font-size: 18px;
+	line-height: 1.5;
+	color: var(--text);
+}
+
+.speech-bubble strong {
+	font-weight: 600;
+	color: #2a76a8;
+}
+
+/* The tail: two slim triangles, the outer one in the border colour, the inner one in the bubble's fill */
+.speech-bubble::before,
+.speech-bubble::after {
+	content: "";
+	position: absolute;
+	clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.speech-bubble::before {
+	left: -19px;
+	top: 20px;
+	width: 20px;
+	height: 14px;
+	background: #c9e1f3;
+}
+
+.speech-bubble::after {
+	left: -17px;
+	top: 21px;
+	width: 19px;
+	height: 12px;
+	background: #f1f8fd;
+}
+
 /* ---------- Home: two columns ---------- */
 
 .columns {
@@ -144,6 +187,20 @@ h1, h2, h3,
 /* Larger thumbnail column for wide, screen-recording style thumbnails */
 .pub-wide-thumb {
 	grid-template-columns: 280px 1fr;
+}
+
+/* The one paper shown on the home page: a slightly larger thumbnail beside the text */
+.pub-featured {
+	grid-template-columns: 200px 1fr;
+}
+
+.pub-featured .pub-title,
+.pub-featured .pub-title a {
+	font-size: 1.15em;
+}
+
+.pub-summary {
+	margin: 10px 0 0;
 }
 
 .pub-thumb {
@@ -364,6 +421,146 @@ body {
 	margin: 0 0 20px 30px;
 }
 
+/* Opening line of the About Me page: a little extra space before the next paragraph */
+.about-intro {
+	margin-bottom: 1.8em;
+}
+
+/* Small speaker button that plays a recording of my name */
+.say-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	margin: 0 1px 0 6px;
+	padding: 0;
+	vertical-align: middle;
+	color: var(--muted);
+	background: none;
+	border: 1px solid var(--border);
+	border-radius: 50%;
+	cursor: pointer;
+	transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.say-btn[hidden] {
+	display: none;
+}
+
+.say-btn svg {
+	fill: currentColor;
+	stroke: currentColor;
+	stroke-width: 1.6;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.say-btn svg path:nth-child(2) {
+	fill: none;
+}
+
+.say-btn:hover,
+.say-btn.is-playing {
+	color: #4b9cd3;
+	border-color: #4b9cd3;
+}
+
+/* Section headings after the photo start below it instead of beside it */
+.about-photo ~ .mini-header {
+	clear: both;
+}
+
+/* Links in the Education list: underlined, same weight as the text around them, soft yellow highlight on hover */
+.edu-list a,
+.link-ul {
+	font-weight: inherit;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	border-radius: 3px;
+	transition: background 0.15s;
+}
+
+.edu-list a:hover,
+.link-ul:hover {
+	color: var(--text);
+	background: #fff0a6;
+}
+
+/* A section heading that is also a shortcut to that section's own page */
+.heading-link {
+	color: inherit;
+	font-weight: inherit;
+	border-radius: 3px;
+	transition: background 0.15s;
+}
+
+.heading-link span {
+	font-size: 0.7em;
+	color: var(--muted);
+}
+
+.heading-link:hover {
+	color: var(--text);
+	background: #fff0a6;
+}
+
+/* A link with no underline and an arrow beside it; soft yellow highlight on hover */
+.arrow-link {
+	font-weight: inherit;
+	border-radius: 3px;
+	transition: background 0.15s;
+}
+
+.arrow-link span {
+	color: var(--muted);
+}
+
+.arrow-link:hover {
+	color: var(--text);
+	background: #fff0a6;
+}
+
+/* Personality: two columns side by side (stacked on narrow screens), each with its own picture */
+.persona-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 36px;
+	align-items: start;
+}
+
+.persona h3 {
+	display: inline-block;
+	margin: 0 0 8px;
+	padding: 2px 12px;
+	font-size: 18px;
+	background: #ececec;
+	border-radius: 4px;
+}
+
+.persona p {
+	margin: 0;
+}
+
+/* A photo with a small caption under it, in the text column */
+.about-figure {
+	margin: 14px 0 8px;
+	max-width: 520px;
+}
+
+.about-figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 6px;
+}
+
+.about-figure figcaption {
+	margin-top: 6px;
+	font-size: 14px;
+	color: var(--muted);
+}
+
 .entry {
 	margin-bottom: 20px;
 }
@@ -454,8 +651,29 @@ footer {
 }
 
 .course-list li {
+	display: flex;
+	align-items: baseline;
+	gap: 16px;
 	padding: 6px 0;
 	border-bottom: 1px solid #eeeeee;
+}
+
+.course-main {
+	flex: 1;
+	min-width: 0;
+}
+
+/* Right-hand column for the grade */
+.course-grade {
+	flex: none;
+	min-width: 48px;
+	text-align: right;
+	font-weight: 600;
+}
+
+.course-grade.is-empty {
+	color: var(--border);
+	font-weight: 400;
 }
 
 .course-code {
@@ -919,6 +1137,14 @@ footer {
 	border-radius: 3px;
 }
 
+/* A sentence underlined in blue (the same blue as the highlights) */
+.underline-blue {
+	text-decoration: underline;
+	text-decoration-color: #4b9cd3;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 4px;
+}
+
 .search-eras svg {
 	display: block;
 	width: 100%;
@@ -1316,12 +1542,37 @@ footer {
 		max-width: 280px;
 	}
 
+	/* Photo is above the text now, so the tail points up at it */
+	.speech-bubble::before,
+	.speech-bubble::after {
+		clip-path: polygon(50% 0, 0 100%, 100% 100%);
+	}
+
+	.speech-bubble::before {
+		left: 28px;
+		top: -19px;
+		width: 14px;
+		height: 20px;
+	}
+
+	.speech-bubble::after {
+		left: 29px;
+		top: -17px;
+		width: 12px;
+		height: 19px;
+	}
+
 	.sidebar {
 		padding-right: 0;
 	}
 }
 
 @media (max-width: 700px) {
+	.persona-grid {
+		grid-template-columns: 1fr;
+		gap: 28px;
+	}
+
 	.area-row {
 		grid-template-columns: 1fr;
 	}

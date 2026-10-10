@@ -42,8 +42,9 @@ papers/             CV.pdf and the research / teaching statements
 - **Profile text, news, contact:** edit `index.html` directly.
 - **Publications:** add an entry to the top of `window.PUBLICATIONS` in `data/publications.js`, with a short
   unique `slug`, and put the paper's files in `publications/<slug>/`. In the entry, a bare file name
-  (`pdf: "paper.pdf"`, `image: "thumb.png"`) means a file in that folder. Both the home page (latest 20)
-  and the publications page update automatically.
+  (`pdf: "paper.pdf"`, `image: "thumb.png"`) means a file in that folder. The publications page lists
+  them all; the home page shows one paper large (the first one with `featured: true`, otherwise the newest),
+  with an optional `summary` under it.
 - **Projects:** copy `projects/mindflex/` to `projects/<slug>/`, write the page, and add an entry to the top
   of `window.PROJECTS` in `data/projects.js`.
 - **Blog posts:** see "Writing a post" below.

@@ -7,9 +7,9 @@
 	<meta name="description" content="Subin Seo is a researcher working on [research area].">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Montserrat:wght@300&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-	<link href="css/style.css?v=67" rel="stylesheet">
-	<script src="js/nav.js?v=14"></script>
-	<link rel="icon" href="img/favicon.svg?v=2" type="image/svg+xml">
+	<link href="css/style.css?v=87" rel="stylesheet">
+	<script src="js/nav.js?v=16"></script>
+	<link rel="icon" href="img/favicon.svg?v=3" type="image/svg+xml">
 </head>
 <body>
 
@@ -28,14 +28,12 @@
 
 			<p>
 				Member of the <a href="#">CHILL (Computer-Human Interaction and Learning Lab)</a> at UNC<br>
-				Advised by <a href="https://ils.unc.edu/~rcapra/">Rob Capra</a>,
-				working closely with <a href="https://ils.unc.edu/~jarguell/">Jaime Arguello</a>
+				Advised by <a href="https://sdis.unc.edu/person/rob-capra/">Dr. Rob Capra</a>,
+				working closely with <a href="https://sdis.unc.edu/person/jaime-arguello/">Dr. Jaime Arguello</a>
 			</p>
 
-			<p>
-				My research is in the field of [area 1], [area 2], and [area 3].
-				I work on [one or two sentences describing what you build or study and why it matters],
-				with applications to [application domain 1], [application domain 2], and [application domain 3].
+			<p class="speech-bubble">
+				I am a <strong>UX and HCI researcher</strong>, and I mainly study <strong>users of generative AI</strong>.
 			</p>
 		</div>
 	</section>
@@ -44,7 +42,7 @@
 	<section class="container columns">
 
 		<main class="main">
-			<h2 class="mini-header">Featured Recent Publications <a href="publications.html" style="font-size: 16px; font-variant: normal;">(see all)</a></h2>
+			<h2 class="mini-header">Featured Recent Publication <a href="publications.html" style="font-size: 16px; font-variant: normal;">(see all)</a></h2>
 			<div id="latest-publications"></div>
 		</main>
 
@@ -76,9 +74,9 @@
 	</footer>
 
 	<script src="data/publications.js?v=12"></script>
-	<script src="js/publications.js?v=11"></script>
+	<script src="js/publications.js?v=12"></script>
 	<script>
-		renderPublications(document.getElementById("latest-publications"), { limit: 20 });
+		renderPublications(document.getElementById("latest-publications"), { featured: true });
 
 		// Clicking the email copies it instead of opening a mail app.
 		// If copying is not possible, the normal mailto link still works.

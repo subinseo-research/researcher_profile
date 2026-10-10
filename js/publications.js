@@ -24,8 +24,8 @@
 		return "publications/" + pub.slug + "/" + value;
 	}
 
-	function renderPub(pub) {
-		var article = el("article", "pub");
+	function renderPub(pub, featured) {
+		var article = el("article", featured ? "pub pub-featured" : "pub");
 
 		var thumbCell = el("div");
 		if (pub.image) {
@@ -79,6 +79,8 @@
 		});
 		if (links.childNodes.length) body.appendChild(links);
 
+		if (featured && pub.summary) body.appendChild(el("p", "pub-summary", pub.summary));
+
 		var tags = (pub.tags || []).filter(function (key) {
 			return window.TAGS[key];
 		});
@@ -96,10 +98,17 @@
 		return article;
 	}
 
+	// options.featured: show just one paper, large: the first one marked `featured: true`,
+	// otherwise the newest (first in the list).
 	// options.limit: show only the first N. options.groupByYear: insert year headings.
 	// options.tag: show only papers with this tag.
 	window.renderPublications = function (container, options) {
 		options = options || {};
+		if (options.featured) {
+			var pick = window.PUBLICATIONS.filter(function (pub) { return pub.featured; })[0] || window.PUBLICATIONS[0];
+			if (pick) container.appendChild(renderPub(pick, true));
+			return;
+		}
 		var pubs = window.PUBLICATIONS.filter(function (pub) {
 			return !options.tag || (pub.tags || []).indexOf(options.tag) !== -1;
 		}).slice(0, options.limit || undefined);

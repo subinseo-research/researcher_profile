@@ -18,6 +18,8 @@ window.TAGS = {
 //   publications/<slug>/ (PDF, thumbnail, slides...). With a slug, `image` and the `links` can be just a
 //   file name inside that folder (e.g. image: "thumb.png", pdf: "paper.pdf"). A value that contains a "/"
 //   or starts with "http" is used as written (e.g. "img/paper-placeholder.svg", "https://github.com/...").
+// `featured`: true on the one paper to show large on the home page (default: the first paper in the list).
+// `summary`: optional one or two sentences, shown only under the featured paper on the home page.
 // `tags`: zero or more keys from window.TAGS.
 // Leave a link empty ("") or delete it to hide its button.
 window.PUBLICATIONS = [
@@ -28,7 +30,7 @@ window.PUBLICATIONS = [
 		venue: "CHI",
 		venueUrl: "",
 		year: 2026,
-		award: "Best Paper",
+		award: "",
 		tags: ["main"],
 		image: "img/paper-placeholder.svg",
 		links: {

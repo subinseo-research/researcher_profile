@@ -6,6 +6,7 @@
 //   program: the degree/school heading used in the by-term view
 //   school:  short school name shown next to the course in the by-department view
 //   term:    "Spring 2026", "Summer 2026", "Fall 2026", ...
+//   grade:   optional, shown in the right-hand column (e.g. "A", "A-", "P"); a dash is shown until it is filled in
 
 window.COURSES = [
 	{ code: "INLS 000", title: "[Course Title]", dept: "lis",
@@ -54,14 +55,18 @@ window.COURSES = [
 		var ul = el("ul", "course-list");
 		courses.forEach(function (c) {
 			var li = el("li");
-			li.appendChild(el("span", "course-code", c.code));
-			li.appendChild(document.createTextNode(" "));
-			li.appendChild(el("span", "course-title", c.title));
+			var main = el("span", "course-main");
+			main.appendChild(el("span", "course-code", c.code));
+			main.appendChild(document.createTextNode(" "));
+			main.appendChild(el("span", "course-title", c.title));
 			var m = meta(c);
 			if (m) {
-				li.appendChild(document.createTextNode(" "));
-				li.appendChild(el("span", "meta", m));
+				main.appendChild(document.createTextNode(" "));
+				main.appendChild(el("span", "meta", m));
 			}
+			li.appendChild(main);
+			// Right-hand column for the grade
+			li.appendChild(el("span", c.grade ? "course-grade" : "course-grade is-empty", c.grade || "–"));
 			ul.appendChild(li);
 		});
 		return ul;
