@@ -48,13 +48,18 @@ the post to `blog.html`. Each post needs a short unique `data-slug`.
 2. In the repo: Settings -> General -> Features -> turn on Discussions.
 3. In Discussions, create a category named `Blog comments` (type: Announcements, so only giscus can start threads).
 4. Install the giscus app on the repo: https://github.com/apps/giscus
-5. Open https://giscus.app, enter the repo and category, and copy the four values it shows
-   (`repo`, `repoId`, `category`, `categoryId`) into `js/blog-config.js`.
+5. Put the four values (`repo`, `repoId`, `category`, `categoryId`) in `js/blog-config.js`. You can look up the ids at
+   https://giscus.app, or read them from `https://giscus.app/api/discussions/categories?repo=OWNER/REPO`.
+   (Done for this site.)
+
+The comment box works as soon as these values are set. Comment *counts* (on the blog list and under each post)
+are read through the heart server below, because giscus's own API refuses requests from other websites.
 
 **Hearts (no login; your own tiny free server on Cloudflare Workers):**
 1. Make a free Cloudflare account, then in the `worker/` folder run `npx wrangler login`.
 2. Run `npx wrangler kv namespace create HEARTS` and paste the printed `id` into `worker/wrangler.toml`.
-3. In `worker/wrangler.toml`, check `ALLOWED_ORIGINS` (your site address) and list every post slug in `ALLOWED_SLUGS`.
+3. In `worker/wrangler.toml`, check `ALLOWED_ORIGINS` (your site address), list every post slug in `ALLOWED_SLUGS`,
+   and keep `GISCUS_REPO` / `GISCUS_CATEGORY` in step with `js/blog-config.js`.
 4. Run `npx wrangler deploy`, copy the address it prints into `heartsEndpoint` in `js/blog-config.js`.
 
 Hearts are a casual "like": one per browser, so clearing browser data lets a visitor heart again.

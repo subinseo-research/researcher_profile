@@ -47,6 +47,30 @@ export default {
 			return json(out, 200, cors);
 		}
 
+		// Comment counts. The browser cannot ask giscus directly (its API only allows requests from
+		// giscus.app), so this worker asks on the site's behalf and caches the answer for 5 minutes.
+		if (request.method === "GET" && url.pathname === "/comments") {
+			const slugs = list(url.searchParams.get("slugs")).filter((s) => SLUG.test(s) && allowedSlugs.includes(s)).slice(0, 50);
+			const out = {};
+			if (env.GISCUS_REPO && env.GISCUS_CATEGORY) {
+				for (const slug of slugs) {
+					const api = "https://giscus.app/api/discussions?repo=" + encodeURIComponent(env.GISCUS_REPO) +
+						"&term=" + encodeURIComponent(slug) + "&category=" + encodeURIComponent(env.GISCUS_CATEGORY) + "&strict=false&first=1";
+					try {
+						const data = await (await fetch(api, { cf: { cacheTtl: 300, cacheEverything: true } })).json();
+						if (data && data.discussion && typeof data.discussion.totalCommentCount === "number") {
+							out[slug] = data.discussion.totalCommentCount + (Number(data.discussion.totalReplyCount) || 0);
+						} else if (data && /not found/i.test(data.error || "")) {
+							out[slug] = 0; // nobody has commented yet, so no discussion exists
+						}
+					} catch (e) {
+						// leave this post out; the page then shows no number rather than a wrong one
+					}
+				}
+			}
+			return json(out, 200, cors);
+		}
+
 		// Add or remove this visitor's heart.
 		const match = url.pathname.match(/^\/hearts\/([^/]+)$/);
 		if (request.method === "POST" && match) {

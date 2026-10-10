@@ -1,7 +1,7 @@
 // Blog features, shared by the blog list (blog.html) and every post page:
 //   - floating table of contents on post pages (built from the headings)
 //   - heart buttons (one per post) with counts when the heart server is configured
-//   - comment counts and the comment box (giscus) when giscus is configured
+//   - comment counts (read through the heart server) and the comment box (giscus) when configured
 // Markup hooks:
 //   [data-slug="my-post"]     on each post (list row or post article)
 //   .heart-btn[data-slug]     a heart button; .comment-count[data-slug] a comment-count link
@@ -108,23 +108,21 @@
 
 	function initCommentCounts() {
 		var els = document.querySelectorAll(".comment-count[data-slug]");
-		if (!els.length || !COMMENTS_READY) return;
-		var seen = {};
+		// Counts come from the heart server (it reads giscus for us); without it, no number is shown.
+		if (!els.length || !HEARTS) return;
+		var slugs = [];
 		els.forEach(function (el) {
 			var slug = el.getAttribute("data-slug");
-			if (seen[slug]) return;
-			seen[slug] = true;
-			var url = "https://giscus.app/api/discussions?repo=" + encodeURIComponent(G.repo) +
-				"&term=" + encodeURIComponent(slug) + "&category=" + encodeURIComponent(G.category) + "&strict=false&first=1";
-			fetch(url).then(function (r) { return r.json(); }).then(function (data) {
-				if (data && data.discussion && typeof data.discussion.totalCommentCount === "number") {
-					// totalCommentCount counts top-level comments; add replies for the full number
-					setCommentCount(slug, data.discussion.totalCommentCount + (data.discussion.totalReplyCount || 0));
-				} else if (data && /not found/i.test(data.error || "")) {
-					setCommentCount(slug, 0); // nobody has commented yet, so no discussion exists
-				}
-			}).catch(function () {});
+			if (slugs.indexOf(slug) === -1) slugs.push(slug);
 		});
+		fetch(HEARTS + "/comments?slugs=" + slugs.map(encodeURIComponent).join(","))
+			.then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+			.then(function (data) {
+				slugs.forEach(function (s) {
+					if (typeof data[s] === "number") setCommentCount(s, data[s]);
+				});
+			})
+			.catch(function () {});
 	}
 
 	// ---------- Comment box (giscus) ----------

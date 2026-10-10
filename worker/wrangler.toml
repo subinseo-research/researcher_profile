@@ -13,3 +13,6 @@ id = "PASTE_KV_NAMESPACE_ID_HERE"
 ALLOWED_ORIGINS = "https://subinseo-research.github.io"
 # Posts that can receive hearts: the slug of every post (data-slug in the HTML). Add new posts here.
 ALLOWED_SLUGS = "next-generation"
+# Where the comments live (same values as in js/blog-config.js); used to look up comment counts.
+GISCUS_REPO = "subinseo-research/researcher_profile"
+GISCUS_CATEGORY = "Blog comments"

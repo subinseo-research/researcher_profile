@@ -12,8 +12,8 @@ window.BLOG_CONFIG = {
 	// Comments: giscus (GitHub Discussions). Get the four values from https://giscus.app
 	giscus: {
 		repo: "subinseo-research/researcher_profile",
-		repoId: "",
+		repoId: "R_kgDOVBnwCg",
 		category: "Blog comments",
-		categoryId: "",
+		categoryId: "DIC_kwDOVBnwCs4DHdzE",
 	},
 };
