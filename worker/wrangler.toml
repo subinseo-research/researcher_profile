@@ -6,7 +6,7 @@ compatibility_date = "2026-01-01"
 # then paste the id it prints below.
 [[kv_namespaces]]
 binding = "HEARTS"
-id = "PASTE_KV_NAMESPACE_ID_HERE"
+id = "b50bab4908084f74922582fb2ec495ec"
 
 [vars]
 # Sites allowed to call this worker (comma-separated, no trailing slash).

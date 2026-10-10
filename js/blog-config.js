@@ -6,8 +6,8 @@
 window.BLOG_CONFIG = {
 	// Hearts: the address of the deployed worker (see worker/). Example:
 	//   "https://blog-hearts.your-account.workers.dev"
-	// Leave "" until it is deployed.
-	heartsEndpoint: "",
+	// (Deployed. Leave "" to switch hearts back to browser-only.)
+	heartsEndpoint: "https://blog-hearts.subinseo-research.workers.dev",
 
 	// Comments: giscus (GitHub Discussions). Get the four values from https://giscus.app
 	giscus: {
