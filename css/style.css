@@ -668,7 +668,6 @@ footer {
 	flex: none;
 	min-width: 48px;
 	text-align: right;
-	font-weight: 600;
 }
 
 .course-grade.is-empty {
@@ -679,7 +678,6 @@ footer {
 .course-code {
 	display: inline-block;
 	min-width: 96px;
-	font-weight: 600;
 }
 
 .course-list .meta {

@@ -1,6 +1,7 @@
 // Course list for courses.html, shown two ways: by department or by term.
 // Add each course once here; both views are built from this list.
 //
+//   code:    optional course code; left out when the source has none
 //   dept:    "lis" | "psych" | "stats" | "other"
 //   field:   for dept "other" only, the sub-heading (e.g. "Education")
 //   program: the degree/school heading used in the by-term view
@@ -8,24 +9,93 @@
 //   term:    "Spring 2026", "Summer 2026", "Fall 2026", ...
 //   grade:   optional, shown in the right-hand column (e.g. "A", "A-", "P"); a dash is shown until it is filled in
 
+// University of Maryland, College Park (UMD) MLIS coursework, from the unofficial transcript (as of Oct 16, 2026).
+// The non-credit English course (UMEI005) is left out. "S" is a satisfactory thesis-research grade.
+var UMD_PROGRAM = "MLIS, Library and Information Science — University of Maryland, College Park";
+function umd(term, code, title, grade) {
+	return { code: code, title: title, dept: "lis", program: UMD_PROGRAM, school: "UMD", term: term, grade: grade };
+}
+
+// Jeonbuk National University (JBNU) coursework, from the official scholastic record (issued Nov 28, 2025).
+// The record has no course codes, so these entries have none. Semesters: 1st = Spring, 2nd = Fall.
+// Non-credit career, counseling and volunteer pass/fail items are left out.
+var JBNU_PROGRAM = "BLIS in Library and Information Science, BA in Psychology (Minor: Statistics) — Jeonbuk National University";
+function jbnu(term, dept, title, grade, field) {
+	return { title: title, dept: dept, field: field, program: JBNU_PROGRAM, school: "JBNU", term: term, grade: grade };
+}
+var CS = "Computer and Data Science";
+
 window.COURSES = [
-	{ code: "INLS 000", title: "[Course Title]", dept: "lis",
+	{ code: "INLS 881", title: "Introduction to Doctoral Studies in ILS", dept: "lis",
 		program: "PhD, Information and Library Science — UNC Chapel Hill", school: "UNC", term: "Fall 2026" },
-	{ code: "PSYC 000", title: "[Course Title]", dept: "psych",
+	{ code: "PSYC 831", title: "Item Response Theory", dept: "psych",
+		program: "PhD, Information and Library Science — UNC Chapel Hill", school: "UNC", term: "Fall 2026" },
+	{ code: "PSYC 746", title: "Human Memory", dept: "psych",
 		program: "PhD, Information and Library Science — UNC Chapel Hill", school: "UNC", term: "Fall 2026" },
 
-	{ code: "LIS 000", title: "[Course Title]", dept: "lis",
-		program: "[Previous Degree, Major] — [University]", school: "[University]", term: "Spring 2024" },
-	{ code: "PSY 000", title: "[Course Title]", dept: "psych",
-		program: "[Previous Degree, Major] — [University]", school: "[University]", term: "Spring 2024" },
-	{ code: "STAT 000", title: "[Course Title]", dept: "stats",
-		program: "[Previous Degree, Major] — [University]", school: "[University]", term: "Fall 2023" },
-	{ code: "STAT 000", title: "[Course Title]", dept: "stats",
-		program: "[Previous Degree, Major] — [University]", school: "[University]", term: "Fall 2023" },
-	{ code: "EDU 000", title: "[Course Title]", dept: "other", field: "Education",
-		program: "[Previous Degree, Major] — [University]", school: "[University]", term: "Fall 2023" },
-	{ code: "CS 000", title: "[Course Title]", dept: "other", field: "Computer Science",
-		program: "[Previous Degree, Major] — [University]", school: "[University]", term: "Spring 2023" },
+	umd("Spring 2026", "INST639T", "Social and Psychological Impacts of AI", "A+"),
+	umd("Spring 2026", "INST798", "Seminar in Research Methods — Experimental Methods", "A"),
+
+	umd("Fall 2025", "INST728F", "Generative AI in UX", "A+"),
+	umd("Fall 2025", "INST799", "Master's Thesis Research", "S"),
+	umd("Fall 2025", "INST878D", "Governing Algorithms and Algorithmic Governance", "A-"),
+	umd("Fall 2025", "INST878O", "Special Topics in Information Research", "A"),
+
+	umd("Spring 2025", "INST798", "Seminar in Research Methods — Mixed Methods", "A"),
+	umd("Spring 2025", "LBSC631", "Achieving Organizational Excellence", "A"),
+	umd("Spring 2025", "LBSC671", "Information Lifecycle", "A"),
+
+	umd("Fall 2024", "INST600", "Foundations for Library and Information Science", "A+"),
+	umd("Fall 2024", "LBSC602", "Serving Information Needs", "A+"),
+
+	jbnu("Fall 2023", "stats", "Regression Analysis 1", "B+"),
+	jbnu("Fall 2023", "psych", "Laboratory in Cognitive Neuroscience", "A+"),
+	jbnu("Fall 2023", "psych", "Psychology & Marketing", "A+"),
+	jbnu("Fall 2023", "psych", "Psychology of Vocation and Career Consulting", "A+"),
+
+	jbnu("Spring 2023", "lis", "Understanding Data Driven Society", "A+"),
+	jbnu("Spring 2023", "stats", "Exploratory Data Analysis", "A0"),
+	jbnu("Spring 2023", "stats", "Linear Algebra", "B+"),
+	jbnu("Spring 2023", "psych", "Social Psychology", "A+"),
+	jbnu("Spring 2023", "psych", "Statistics of Psychology", "A+"),
+	jbnu("Spring 2023", "other", "Artificial Intelligence", "A0", CS),
+
+	jbnu("Fall 2022", "lis", "Introduction to Database", "A+"),
+	jbnu("Fall 2022", "lis", "Text Information Analysis", "A+"),
+	jbnu("Fall 2022", "stats", "Introduction to Big Data", "A+"),
+	jbnu("Fall 2022", "stats", "Machine Learning", "A+"),
+	jbnu("Fall 2022", "lis", "Text Mining", "A+"),
+	jbnu("Fall 2022", "psych", "Adult Development", "A+"),
+	jbnu("Fall 2022", "psych", "General Psychology", "A+"),
+
+	jbnu("Fall 2021", "lis", "Information Services", "A+"),
+	jbnu("Fall 2021", "lis", "Data Visualization", "A+"),
+	jbnu("Fall 2021", "psych", "Abnormal Psychology", "A+"),
+	jbnu("Fall 2021", "psych", "Cognitive Psychology Capstone Design", "A+"),
+	jbnu("Fall 2021", "psych", "Developmental Psychology", "A0"),
+	jbnu("Fall 2021", "psych", "Psychology of Learning", "A+"),
+	jbnu("Fall 2021", "psych", "Research Methods in Psychology", "A+"),
+
+	jbnu("Spring 2021", "lis", "Information Retrieval", "A+"),
+	jbnu("Spring 2021", "lis", "Access to Cultural Contents", "A0"),
+	jbnu("Spring 2021", "lis", "Information Media", "A0"),
+	jbnu("Spring 2021", "lis", "Information Resource Management", "A0"),
+	jbnu("Spring 2021", "psych", "Introduction to Neuroscience", "A+"),
+	jbnu("Spring 2021", "psych", "Psychology of Personality", "A+"),
+
+	jbnu("Spring 2020", "other", "Introduction to Computer Programming", "A+", CS),
+	jbnu("Spring 2020", "lis", "Information Materials Organization 1", "A0"),
+	jbnu("Spring 2020", "lis", "Computer Information Processing", "B+"),
+	jbnu("Spring 2020", "lis", "Education of Book Reading", "B+"),
+	jbnu("Spring 2020", "lis", "Web Database Searching", "B+"),
+
+	jbnu("Fall 2019", "other", "Understanding & Usage of Big Data", "A0", CS),
+	jbnu("Fall 2019", "lis", "Introduction to Library & Information Science", "A0"),
+	jbnu("Fall 2019", "lis", "Introduction to Information Management", "A+"),
+	jbnu("Fall 2019", "stats", "Introduction to Statistics", "B0"),
+
+	jbnu("Spring 2019", "psych", "Introduction to Modern Psychology", "A0"),
+	jbnu("Spring 2019", "lis", "Utilization of Library Data", "A+"),
 ];
 
 (function () {
