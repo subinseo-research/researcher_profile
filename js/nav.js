@@ -1,6 +1,6 @@
 // Hamburger button + side menu, shared by every page. Load in <head> so the
-// open/closed state is set before the first paint. Edit NAV_LINKS to change the menu.
-// Works from pages in subfolders too (blog/<post>/, projects/<project>/): links are resolved
+// open/closed state is set before the first paint. Edit NAV_LINKS to change the menu (newTab: true opens an item in a new tab).
+// Works from pages in subfolders too (blog/<post>/, projects/<project>/, courses/): links are resolved
 // against the site root, found from this script's own address.
 //
 // - The menu starts closed on every page. Opening it with the button on a wide
@@ -17,8 +17,8 @@
 		{ href: "index.html", label: "Home" },
 		{ href: "aboutme.html", label: "About Me" },
 		{ href: "aoi.html", label: "Areas of Interest", also: ["aoi-sub.html", "concept-map.html"] },
-		{ href: "papers/CV.pdf", label: "CV" },
-		{ href: "courses.html", label: "Coursework" },
+		{ href: "papers/CV.pdf", label: "CV", newTab: true },
+		{ href: "courses.html", label: "Coursework", also: ["courses/"] },
 		{ href: "publications.html", label: "Publications", also: ["publications/"] },
 		{ href: "projects.html", label: "Fun Projects", also: ["projects/"] },
 		{ href: "blog.html", label: "Blog", also: ["blog/"] },
@@ -87,6 +87,10 @@
 			var a = document.createElement("a");
 			a.href = ROOT + item.href;
 			a.textContent = item.label;
+			if (item.newTab) {
+				a.target = "_blank";
+				a.rel = "noopener";
+			}
 			if (isCurrent(item)) {
 				a.className = "active";
 				a.setAttribute("aria-current", "page");

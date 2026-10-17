@@ -249,7 +249,7 @@ h1, h2, h3,
 }
 
 .pub-tags {
-	margin-top: 8px;
+	margin-bottom: 2px;
 }
 
 .tag {
@@ -260,6 +260,18 @@ h1, h2, h3,
 	color: var(--muted);
 	background: #f2f2f2;
 	border-radius: 10px;
+}
+
+/* HCI label */
+.tag-main {
+	color: var(--text);
+	background: #fff0a6;
+}
+
+.tag-subarea {
+	background: none;
+	border: 1px solid #e0e0e0;
+	padding: 0 7px;
 }
 
 .tag-filter {
@@ -280,6 +292,16 @@ h1, h2, h3,
 	color: var(--bg);
 	background: var(--text);
 	border-color: var(--text);
+}
+
+/* Second row of buttons, shown under the area buttons when an area has sub-areas */
+.sub-filter {
+	margin-top: -2px;
+}
+
+.sub-filter a {
+	font-size: 13px;
+	color: var(--muted);
 }
 
 .related {
@@ -581,6 +603,46 @@ footer {
 
 .course-group {
 	margin-bottom: 36px;
+}
+
+/* Coursework: the list with a floating overview beside it. The page is wide so course rows stay on one line. */
+.page-courses {
+	max-width: 1240px;
+}
+
+.page-courses > p {
+	max-width: 760px;
+}
+
+.course-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 230px;
+	gap: 40px;
+	align-items: start;
+}
+
+.course-layout .mini-header,
+.course-layout .course-term {
+	scroll-margin-top: 24px;
+}
+
+.course-layout .toc li a {
+	white-space: nowrap;
+}
+
+/* Terms (or fields) sit further in than the program (or discipline) above them */
+.course-layout .toc li.toc-sub a {
+	padding-left: 42px;
+}
+
+@media (max-width: 1200px) {
+	.course-layout {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.course-layout .toc {
+		display: none;
+	}
 }
 
 /* Page title with a control beside it */

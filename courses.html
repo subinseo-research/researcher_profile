@@ -6,13 +6,13 @@
 	<title>Coursework - Subin Seo</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Montserrat:wght@300&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-	<link href="css/style.css?v=88" rel="stylesheet">
-	<script src="js/nav.js?v=16"></script>
+	<link href="css/style.css?v=95" rel="stylesheet">
+	<script src="js/nav.js?v=18"></script>
 	<link rel="icon" href="img/favicon.svg?v=3" type="image/svg+xml">
 </head>
 <body>
 
-	<div class="page">
+	<div class="page page-courses">
 		<div class="title-row">
 			<h1>Coursework</h1>
 			<div class="view-toggle" id="course-view" role="radiogroup" aria-label="Sort courses">
@@ -26,17 +26,23 @@
 			My interdisciplinary background in information science, psychology, and statistics has shaped my interest in search behavior and given me an integrative lens for studying it.
 		</p>
 
-		<!-- Courses are listed in js/courses.js -->
-		<div id="course-list"></div>
+		<!-- Courses are listed in js/courses.js. The overview beside them is built from the section headings. -->
+		<div class="course-layout">
+			<div id="course-list"></div>
+			<aside class="toc" id="course-toc" aria-label="Overview" hidden>
+				<p class="toc-title">Overview</p>
+				<ol id="course-toc-list"></ol>
+			</aside>
+		</div>
 	</div>
 
 	<footer>
 		&copy; 2026 Subin Seo
 	</footer>
 
-	<script src="js/courses.js?v=3"></script>
+	<script src="js/courses.js?v=6"></script>
 	<script>
-		initCourses(document.getElementById("course-view"), document.getElementById("course-list"));
+		initCourses(document.getElementById("course-view"), document.getElementById("course-list"), document.getElementById("course-toc"));
 	</script>
 </body>
 </html>

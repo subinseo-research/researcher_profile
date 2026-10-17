@@ -2,6 +2,7 @@
 // Add each course once here; both views are built from this list.
 //
 //   code:    optional course code; left out when the source has none
+//   page:    optional course page (e.g. "courses/inls881.html"); the title links to it when set
 //   dept:    "lis" | "psych" | "stats" | "other"
 //   field:   for dept "other" only, the sub-heading (e.g. "Education")
 //   program: the degree/school heading used in the by-term view
@@ -26,27 +27,26 @@ function jbnu(term, dept, title, grade, field) {
 var CS = "Computer and Data Science";
 
 window.COURSES = [
-	{ code: "INLS 881", title: "Introduction to Doctoral Studies in ILS", dept: "lis",
+	{ code: "INLS 881", page: "courses/inls881.html", title: "Introduction to Doctoral Studies in ILS", dept: "lis",
 		program: "PhD, Information and Library Science — UNC Chapel Hill", school: "UNC", term: "Fall 2026" },
-	{ code: "PSYC 831", title: "Item Response Theory", dept: "psych",
+	{ code: "PSYC 831", page: "courses/psyc831.html", title: "Item Response Theory", dept: "psych",
 		program: "PhD, Information and Library Science — UNC Chapel Hill", school: "UNC", term: "Fall 2026" },
-	{ code: "PSYC 746", title: "Human Memory", dept: "psych",
+	{ code: "PSYC 746", page: "courses/psyc746.html", title: "Human Memory", dept: "psych",
 		program: "PhD, Information and Library Science — UNC Chapel Hill", school: "UNC", term: "Fall 2026" },
 
 	umd("Spring 2026", "INST639T", "Social and Psychological Impacts of AI", "A+"),
 	umd("Spring 2026", "INST798", "Seminar in Research Methods — Experimental Methods", "A"),
 
 	umd("Fall 2025", "INST728F", "Generative AI in UX", "A+"),
-	umd("Fall 2025", "INST799", "Master's Thesis Research", "S"),
 	umd("Fall 2025", "INST878D", "Governing Algorithms and Algorithmic Governance", "A-"),
-	umd("Fall 2025", "INST878O", "Special Topics in Information Research", "A"),
+	umd("Fall 2025", "INST878O", "Computer-Supported Cooperative Work (CSCW)", "A"),
 
 	umd("Spring 2025", "INST798", "Seminar in Research Methods — Mixed Methods", "A"),
 	umd("Spring 2025", "LBSC631", "Achieving Organizational Excellence", "A"),
 	umd("Spring 2025", "LBSC671", "Information Lifecycle", "A"),
 
-	umd("Fall 2024", "INST600", "Foundations for Library and Information Science", "A+"),
 	umd("Fall 2024", "LBSC602", "Serving Information Needs", "A+"),
+	umd("Fall 2024", "INST600", "Foundations for Library and Information Science", "A+"),
 
 	jbnu("Fall 2023", "stats", "Regression Analysis 1", "B+"),
 	jbnu("Fall 2023", "psych", "Laboratory in Cognitive Neuroscience", "A+"),
@@ -128,7 +128,15 @@ window.COURSES = [
 			var main = el("span", "course-main");
 			main.appendChild(el("span", "course-code", c.code));
 			main.appendChild(document.createTextNode(" "));
-			main.appendChild(el("span", "course-title", c.title));
+			var title = el("span", "course-title");
+			if (c.page) {
+				var link = el("a", "", c.title);
+				link.href = c.page;
+				title.appendChild(link);
+			} else {
+				title.textContent = c.title;
+			}
+			main.appendChild(title);
 			var m = meta(c);
 			if (m) {
 				main.appendChild(document.createTextNode(" "));
@@ -188,7 +196,10 @@ window.COURSES = [
 		var courses = newestFirst(window.COURSES);
 		groupBy(courses, function (c) { return c.program; }).forEach(function (program) {
 			var section = el("section", "course-group");
-			section.appendChild(el("h2", "mini-header", program.key));
+			var heading = el("h2", "mini-header", program.key);
+			// The program names are long; the overview shows just the school
+			heading.setAttribute("data-toc", program.items[0].school);
+			section.appendChild(heading);
 			groupBy(program.items, function (c) { return c.term; }).forEach(function (term) {
 				section.appendChild(el("h3", "course-term", term.key));
 				section.appendChild(courseList(term.items, function () { return ""; }));
@@ -197,8 +208,60 @@ window.COURSES = [
 		});
 	}
 
+	// Floating overview: one entry per top heading (discipline, or degree program) and per sub-heading
+	// (field, or term), highlighting the section being read. Hidden by CSS on narrow screens.
+	var spyHeads = [], spyLinks = [], spyPicked = null;
+
+	function mark(current) {
+		spyLinks.forEach(function (a, i) {
+			a.classList.toggle("is-current", i === current);
+			if (i === current) a.setAttribute("aria-current", "true");
+			else a.removeAttribute("aria-current");
+		});
+	}
+
+	function spy() {
+		if (!spyHeads.length) return;
+		if (spyPicked !== null) return mark(spyPicked);
+		var current = 0;
+		spyHeads.forEach(function (h, i) {
+			if (h.getBoundingClientRect().top <= 140) current = i;
+		});
+		if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = spyHeads.length - 1;
+		mark(current);
+	}
+
+	function buildOverview(container, toc) {
+		var list = toc.querySelector("ol");
+		list.textContent = "";
+		spyHeads = Array.prototype.slice.call(container.querySelectorAll("h2.mini-header, h3.course-term"));
+		spyPicked = null;
+		spyLinks = spyHeads.map(function (h, i) {
+			h.id = "course-section-" + i;
+			var li = el("li", h.tagName === "H3" ? "toc-sub" : "");
+			var a = el("a", "", h.getAttribute("data-toc") || h.textContent);
+			a.href = "#" + h.id;
+			a.addEventListener("click", function (e) {
+				e.preventDefault();
+				var offset = parseFloat(getComputedStyle(h).scrollMarginTop) || 0;
+				var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				window.scrollTo({
+					top: h.getBoundingClientRect().top + window.pageYOffset - offset,
+					behavior: reduce ? "auto" : "smooth",
+				});
+				spyPicked = i;
+				mark(i);
+			});
+			li.appendChild(a);
+			list.appendChild(li);
+			return a;
+		});
+		toc.hidden = false;
+		spy();
+	}
+
 	// Slide toggle; the chosen view is kept in the URL (#by-term) so it survives reloads.
-	window.initCourses = function (toggle, container) {
+	window.initCourses = function (toggle, container, toc) {
 		var buttons = toggle.querySelectorAll("[data-view]");
 
 		function show(view) {
@@ -209,6 +272,8 @@ window.COURSES = [
 			container.textContent = "";
 			if (view === "term") renderByTerm(container);
 			else renderByDept(container);
+			if (!toc) return;
+			buildOverview(container, toc);
 		}
 
 		buttons.forEach(function (b) {
@@ -218,6 +283,13 @@ window.COURSES = [
 				show(view);
 			});
 		});
+
+		// Once the reader scrolls by hand, go back to following the scroll position
+		["wheel", "touchstart", "keydown"].forEach(function (type) {
+			window.addEventListener(type, function () { spyPicked = null; }, { passive: true });
+		});
+		window.addEventListener("scroll", spy, { passive: true });
+		window.addEventListener("resize", spy);
 
 		show(location.hash === "#by-term" ? "term" : "dept");
 	};

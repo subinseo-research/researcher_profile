@@ -9,8 +9,20 @@ window.SITE = {
 // Research-area tags. The key goes in a paper's `tags`; the label is shown on the site.
 // Link to a filtered list with publications.html?tag=<key>.
 window.TAGS = {
-	main: "Human search behavior / HCI & IR",
-	sub: "Bibliometrics, science of science in LIS",
+	main: "HCI",
+	sub: "Bibliometrics",
+};
+
+// Sub-areas, shown as a second row of buttons when their area is selected. Keyed by the area's key;
+// the sub-area key goes in a paper's `subtags`. Link: publications.html?tag=<key>&sub=<subkey>.
+window.SUBTAGS = {
+	main: {
+		search: "Search Behavior",
+		participants: "Human participants",
+		genai: "Generative AI",
+		system: "System development",
+		health: "Health informatics",
+	},
 };
 
 // Newest first. Only `title`, `authors`, `venue`, and `year` are required.
@@ -24,38 +36,61 @@ window.TAGS = {
 // Leave a link empty ("") or delete it to hide its button.
 window.PUBLICATIONS = [
 	{
-		slug: "paper-one",
-		title: "Paper Title One",
-		authors: ["Subin Seo", "Coauthor A", "Coauthor B"],
-		venue: "CHI",
+		slug: "diamond-open-access",
+		title: "Mapping the Landscape of Diamond Open Access Journals with Journal Impact Factor",
+		authors: ["E. Chung", "J. Andrews", "Subin Seo", "J. Yoon"],
+		venue: "Journal of Scholarly Publishing",
+		venueUrl: "",
+		year: 2026,
+		award: "",
+		tags: ["sub"],
+		image: "thumb.png",
+		links: {
+			website: "https://utppublishing.com/doi/abs/10.3138/jsp-2025-0067",
+		},
+	},
+	{
+		slug: "chatbot-health-misinformation",
+		title: "The Role of Chatbot AI as an Intermediary for Processing Health Misinformation",
+		authors: ["Subin Seo"],
+		venue: "iConference 2026 Proceedings (poster)",
 		venueUrl: "",
 		year: 2026,
 		award: "",
 		tags: ["main"],
-		image: "img/paper-placeholder.svg",
+		subtags: ["genai", "health"],
+		image: "thumb.png",
 		links: {
-			pdf: "papers/paper1.pdf",
-			website: "",
-			code: "",
-			data: "",
-			slides: "",
-			video: "",
+			website: "https://www.ideals.illinois.edu/items/139995",
 		},
 	},
 	{
-		slug: "paper-two",
-		title: "Paper Title Two",
-		authors: ["Coauthor C", "Subin Seo"],
-		venue: "CSCW",
+		slug: "landscapes-funded-research",
+		title: "Landscapes of Information Science and Library Science Research: Comparing Funded and Non-Funded Research from 2008 to 2023",
+		authors: ["J. Yoon", "J. Andrews", "Subin Seo", "E. Chung"],
+		venue: "Journal of Documentation",
 		venueUrl: "",
 		year: 2025,
 		award: "",
 		tags: ["sub"],
-		image: "img/paper-placeholder.svg",
+		image: "thumb.png",
 		links: {
-			pdf: "",
-			website: "",
-			code: "https://github.com/",
+			website: "https://doi.org/10.1108/JD-07-2025-0190",
+		},
+	},
+	{
+		slug: "awareness-to-action",
+		title: "From Awareness to Action: Ambient Display and Customizable Attention Signals for Self-regulated Smartphone Usage",
+		authors: ["J. Zheng", "Subin Seo", "E. K. Choe"],
+		venue: "Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies (IMWUT)",
+		venueUrl: "",
+		year: 2025,
+		award: "",
+		tags: ["main"],
+		subtags: ["participants", "system"],
+		image: "thumb.png",
+		links: {
+			website: "https://doi.org/10.1145/3749507",
 		},
 	},
 ];

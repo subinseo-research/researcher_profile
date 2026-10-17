@@ -3,7 +3,7 @@
 (function () {
 	var LINK_LABELS = {
 		pdf: "PDF",
-		website: "Website",
+		website: "Link",
 		code: "Code",
 		data: "Data",
 		slides: "Slides",
@@ -37,6 +37,28 @@
 		article.appendChild(thumbCell);
 
 		var body = el("div");
+
+		// Area tags sit above the title.
+		var tags = (pub.tags || []).filter(function (key) {
+			return window.TAGS[key];
+		});
+		if (tags.length) {
+			var tagRow = el("div", "pub-tags");
+			tags.forEach(function (key) {
+				var t = el("a", "tag tag-" + key, window.TAGS[key]);
+				t.href = "publications.html?tag=" + encodeURIComponent(key);
+				tagRow.appendChild(t);
+				// This paper's sub-areas of the area, right after it
+				var subs = (window.SUBTAGS && window.SUBTAGS[key]) || {};
+				(pub.subtags || []).forEach(function (subKey) {
+					if (!subs[subKey]) return;
+					var st = el("a", "tag tag-subarea", subs[subKey]);
+					st.href = "publications.html?tag=" + encodeURIComponent(key) + "&sub=" + encodeURIComponent(subKey);
+					tagRow.appendChild(st);
+				});
+			});
+			body.appendChild(tagRow);
+		}
 
 		var title = el("div", "pub-title");
 		var titleLink = fileUrl(pub, pub.links && (pub.links.pdf || pub.links.website));
@@ -81,19 +103,6 @@
 
 		if (featured && pub.summary) body.appendChild(el("p", "pub-summary", pub.summary));
 
-		var tags = (pub.tags || []).filter(function (key) {
-			return window.TAGS[key];
-		});
-		if (tags.length) {
-			var tagRow = el("div", "pub-tags");
-			tags.forEach(function (key) {
-				var t = el("a", "tag", window.TAGS[key]);
-				t.href = "publications.html?tag=" + encodeURIComponent(key);
-				tagRow.appendChild(t);
-			});
-			body.appendChild(tagRow);
-		}
-
 		article.appendChild(body);
 		return article;
 	}
@@ -101,7 +110,7 @@
 	// options.featured: show just one paper, large: the first one marked `featured: true`,
 	// otherwise the newest (first in the list).
 	// options.limit: show only the first N. options.groupByYear: insert year headings.
-	// options.tag: show only papers with this tag.
+	// options.tag: show only papers with this tag; options.sub: and this sub-area (needs a tag).
 	window.renderPublications = function (container, options) {
 		options = options || {};
 		if (options.featured) {
@@ -110,7 +119,8 @@
 			return;
 		}
 		var pubs = window.PUBLICATIONS.filter(function (pub) {
-			return !options.tag || (pub.tags || []).indexOf(options.tag) !== -1;
+			if (options.tag && (pub.tags || []).indexOf(options.tag) === -1) return false;
+			return !options.sub || (pub.subtags || []).indexOf(options.sub) !== -1;
 		}).slice(0, options.limit || undefined);
 		var lastYear = null;
 
@@ -129,7 +139,9 @@
 	};
 
 	// "All" plus one button per tag; `active` is the current tag key (or null).
-	window.renderTagFilter = function (container, active) {
+	// If the active tag has sub-areas, a second row of buttons follows; `activeSub` is the current
+	// sub-area key (or null), and clicking it again clears it.
+	window.renderTagFilter = function (container, active, activeSub) {
 		var all = el("a", active ? null : "active", "All");
 		all.href = "publications.html";
 		container.appendChild(all);
@@ -139,5 +151,18 @@
 			a.href = "publications.html?tag=" + encodeURIComponent(key);
 			container.appendChild(a);
 		});
+
+		var subs = active && window.SUBTAGS && window.SUBTAGS[active];
+		if (!subs) return;
+		var row = el("nav", "tag-filter sub-filter");
+		row.setAttribute("aria-label", "Filter by sub-area");
+		Object.keys(subs).forEach(function (key) {
+			var isActive = key === activeSub;
+			var a = el("a", isActive ? "active" : null, subs[key]);
+			a.href = "publications.html?tag=" + encodeURIComponent(active) +
+				(isActive ? "" : "&sub=" + encodeURIComponent(key));
+			row.appendChild(a);
+		});
+		container.after(row);
 	};
 })();
